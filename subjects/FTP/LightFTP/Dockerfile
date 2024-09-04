@@ -125,11 +125,21 @@ RUN AFL_TRACE_PC=1 make
 
 # 克隆 LightFTP 仓库
 WORKDIR /root
-RUN git clone https://github.com/hfiref0x/LightFTP.git LightFTP
+
+COPY --chown=ubuntu:ubuntu collect.py /root/collect.py
+
+RUN mkdir experiments && \
+    cd experiments && \
+    git clone https://github.com/hfiref0x/LightFTP.git LightFTP
 
 # 切换到 LightFTP/Source/Release 目录并使用 afl-clang-fast 编译
-WORKDIR /root/LightFTP/Source/Release
+WORKDIR /root/experiments/LightFTP/Source/Release
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
+
+WORKDIR /root/experiments
+
+COPY --chown=ubuntu:ubuntu peach_parallel_out.sh /root/experiments/peach_parallel_out.sh
+RUN mkdir tasks
 
 
 
