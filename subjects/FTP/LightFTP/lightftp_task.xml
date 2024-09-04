@@ -1,0 +1,142 @@
+<Peach xmlns="http://peachfuzzer.com/2012/Peach" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://peachfuzzer.com/2012/Peach ../peach.xsd">
+ 
+  <DataModel name="DDataUSER">
+    <String value="USER webadmin\r\n"/>
+  </DataModel>
+ 
+  <DataModel name="DDataPASS">
+    <String value="PASS VeryStrongadminpassword222\r\n"/>
+  </DataModel>
+ 
+  <DataModel name="DDataPORT">
+    <String value="PORT 172.17.0.2,4,1\r\n"/>
+  </DataModel>
+ 
+  <DataModel name="DDataREST">
+    <String value="REST 9999\r\n"/>
+  </DataModel>
+ 
+  <DataModel name="DDataMKD">
+    <String value="MKD test\r\n"/>
+  </DataModel>
+ 
+  <DataModel name="DDataRNFR">
+    <String value="RNFR test\r\n"/>
+  </DataModel>
+ 
+  <DataModel name="DDataQUIT">
+    <String value="QUIT\r\n" token="true" mutable="true"/>
+  </DataModel>
+ 
+  <!-- Response -->
+  <DataModel name="DataResponse">
+    <String name="response"/>
+  </DataModel>
+ 
+<DataModel name="DDataSTOR">
+  <String value="STOR my_file.txt\r\n" />
+</DataModel>
+ 
+<DataModel name="DataRETR">
+    <String value="RETR "/>
+    <String value=""/>
+    <String value="\r\n"/>
+  </DataModel>
+ 
+  <!-- State Models -->
+  <StateModel name="AStateUSER" initialState="Initial">
+    <State name="Initial">
+      <Action type="connect"/>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataUSER"/></Action>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataQUIT"/></Action>
+      <Action type="close"/>
+    </State>
+  </StateModel>
+ 
+  <StateModel name="AStatePASS" initialState="Initial">
+    <State name="Initial">
+      <Action type="connect"/>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataPASS"/></Action>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataQUIT"/></Action>
+      <Action type="close"/>
+    </State>
+  </StateModel>
+<StateModel name="AStateSTOR" initialState="Initial">
+  <State name="Initial">
+    <Action type="connect"/>
+    <Action type="input">
+      <DataModel ref="DataResponse"/>
+    </Action>
+    <Action type="output">
+      <DataModel ref="DDataUSER"/>
+    </Action>
+    <Action type="input">
+      <DataModel ref="DataResponse"/>
+    </Action>
+    <Action type="output">
+      <DataModel ref="DDataPASS"/>
+    </Action>
+    <Action type="input">
+      <DataModel ref="DataResponse"/>
+    </Action>
+    <Action type="output">
+      <DataModel ref="DDataSTOR"/>
+    </Action>
+    <Action type="input">
+      <DataModel ref="DataResponse"/>
+    </Action>
+    <Action type="input">
+      <DataModel ref="DataResponse"/>
+    </Action>
+    <Action type="output">
+      <DataModel ref="DDataQUIT"/>
+    </Action>
+    <Action type="close"/>
+  </State>
+</StateModel>
+<StateModel name="StatePORTRETR" initialState="Initial">
+    <State name="Initial">
+      <Action type="connect"/>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataUSER"/></Action>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataPASS"/></Action>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataPORT"/></Action>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DataRETR"/></Action>
+      <Action type="input"><DataModel ref="DataResponse"/></Action>
+      <Action type="output"><DataModel ref="DDataQUIT"/></Action>
+      <Action type="close"/>
+    </State>
+  </StateModel>
+ 
+  <Agent name="LinAgent">
+    <Monitor class="Process">
+	    <Param name="Executable" value="/root/experiments/LightFTP/Source/Release/fftp"/>
+       <Param name="Arguments" value="/root/experiments/LightFTP/Bin/fftp.conf" />
+	   <Param name="RestartOnEachTest" value="true" />
+            <Param name="Faultonearlyexit" value="False" />
+    </Monitor>
+  </Agent>
+ 
+  <Test name="Default">
+    <Agent ref="LinAgent"/>
+    <StateModel ref="AStateUSER"/>
+    <StateModel ref="StatePORTRETR"/>
+    <StateModel ref="AStatePASS"/>
+    <StateModel ref="StatePORTRETR"/>
+    <Publisher class="TcpClient">
+	    <Param name="Host" value="127.0.0.1"/>
+      <Param name="Port" value="21"/>
+    </Publisher>
+                <Logger class="File">
+                <Param name="Path" value="/root/experiments/logs"/>
+        </Logger>
+  </Test>
+</Peach>

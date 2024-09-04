@@ -43,33 +43,6 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E
     sudo apt-get update && \
     sudo apt-get install mono-devel -y
 
-# 克隆协议模糊测试器并准备环境
-RUN cd /root/ && \
-    mkdir Peach && \
-    cd Peach && \
-    git clone https://gitlab.com/gitlab-org/security-products/protocol-fuzzer-ce.git && \
-    cd protocol-fuzzer-ce/3rdParty/pin && \
-    wget http://software.intel.com/sites/landingpage/pintool/downloads/pin-3.2-81205-gcc-linux.tar.gz && \
-    tar -xf pin-3.2-81205-gcc-linux.tar.gz && \
-    cd ../../paket/.paket && \
-    wget https://github.com/fsprojects/Paket/releases/download/5.258.1/paket.exe && \
-    wget https://github.com/fsprojects/Paket/releases/download/5.258.1/paket.bootstrapper.exe && \
-    wget https://github.com/fsprojects/Paket/releases/download/5.258.1/paket.targets && \
-    wget https://github.com/fsprojects/Paket/releases/download/5.258.1/Paket.Restore.targets && \
-    cd ../../3rdParty/pin && \
-    wget https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.19-98425-gd666b2bee-gcc-linux.tar.gz && \
-    tar -zxvf pin-3.19-98425-gd666b2bee-gcc-linux.tar.gz && \
-    mv ./pin-3.19-98425-gd666b2bee-gcc-linux ./pin-3.19-98425-gcc-linux
-
-COPY --chown=ubuntu:ubuntu bblocks.cpp /root/Peach/protocol-fuzzer-ce/core/BasicBlocks/bblocks.cpp
-
-# 编译协议模糊测试器
-RUN cd /root/Peach/protocol-fuzzer-ce/ && \
-    apt-get update && \
-    apt-get install -y python2 && \
-    python2 waf configure --buildtag=0.0.2 && \
-    python2 waf build
-
 # 安装Mono 4.8.1
 RUN sudo apt-get autoremove mono-devel -y && \
     cd /usr/bin && \
@@ -96,10 +69,9 @@ COPY --chown=ubuntu:ubuntu profile /etc/profile
 RUN /bin/bash /etc/profile
 
 # 切换到源代码目录
-WORKDIR /root/Peach/protocol-fuzzer-ce/
+WORKDIR /root/
+COPY --chown=ubuntu:ubuntu Peach /root/Peach/
 
-# 安装协议模糊测试器
-RUN python2 waf install
 
 # 设置工作目录
 WORKDIR /root/
@@ -130,7 +102,7 @@ COPY --chown=ubuntu:ubuntu collect.py /root/collect.py
 
 RUN mkdir experiments && \
     cd experiments && \
-    git clone https://github.com/hfiref0x/LightFTP.git LightFTP
+    git clone http://github.com/hfiref0x/LightFTP.git LightFTP
 
 # 切换到 LightFTP/Source/Release 目录并使用 afl-clang-fast 编译
 WORKDIR /root/experiments/LightFTP/Source/Release
@@ -138,10 +110,12 @@ RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ A
 
 WORKDIR /root/experiments
 
-COPY --chown=ubuntu:ubuntu peach_parallel_out.sh /root/experiments/peach_parallel_out.sh
+COPY --chown=ubuntu:ubuntu --chmod=755 peach_out.sh /root/experiments/peach_out.sh
+COPY --chown=ubuntu:ubuntu --chmod=755 peach_parallel_out.sh /root/experiments/peach_parallel_out.sh
 RUN mkdir tasks
 
-
+RUN mkdir /home/user/
+RUN touch /home/user/fftplog
 
 # 暴露端口（如果需要）
 EXPOSE 8080

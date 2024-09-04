@@ -1,27 +1,8 @@
 #!/bin/bash
 
-# 定义清理函数
-function cleanup {
-    echo "开始清理 ${project}[$$]"
-    pkill -P $$  # 杀死所有子进程
-
-    # 获取网络命名空间中的进程 ID
-    pids=$(ip netns pids${netns})
-
-    echo "开始清理 ${netns}, pids:${pids}"
-    # 杀死进程
-    for pid in $pids; do
-        kill -9 $pid
-    done
-}
-
-# 设置 trap 来捕获退出信号并执行清理函数
-trap cleanup EXIT
-
 # 参数解析
-FUZZER=$1
-TIMEOUT=$2
-container_pit_path=$3
+TIMEOUT=$1
+PIT=$2
 
 # 协议和项目名称
 protocol=ftp
@@ -49,9 +30,9 @@ python3 /root/collect.py ${cov_edge_path} \
     "./branch/collect_branch_mutable_${project}_${t}_${port}" &
 
 # Peach 模糊测试的路径
-FUZZER_PATH=/root/${FUZZER}
+FUZZER_PATH=/root/Peach
 export LUCKY_GLOBAL_MMAP_FILE=${cov_edge_path} SHM_ENV_VAR=${cov_bitmap_path} 
 export PATH=${FUZZER_PATH}:$PATH LD_LIBRARY_PATH=${FUZZER_PATH}:$LD_LIBRARY_PATH 
-timeout ${TIMEOUT} mono ${FUZZER_PATH}/protocol-fuzzer-ce/output/linux_x86_64_release/bin/peach.exe ${container_pit_path} &
+timeout $TIMEOUT mono ${FUZZER_PATH}/bin/peach.exe tasks/$PIT &
 
 while true; do echo 'Worker: Hit CTRL+C'; sleep 1800; done
