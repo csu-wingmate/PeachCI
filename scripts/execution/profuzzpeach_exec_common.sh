@@ -1,11 +1,12 @@
 #!/bin/bash
 
 DOCIMAGE=$1   #name of the docker image
-RUNS=$2       #number of runs
-SAVETO=$3     #path to folder keeping the results
-FUZZER=$4     #fuzzer name (e.g., aflnet) -- this name must match the name of the fuzzer folder inside the Docker container
-TIMEOUT=$5    #time for fuzzing
-DELETE=$6
+PROTOCOL=$2   #name of the protocol
+RUNS=$3       #number of runs
+SAVETO=$4     #path to folder keeping the results
+FUZZER=$5     #fuzzer name (e.g., aflnet) -- this name must match the name of the fuzzer folder inside the Docker container
+TIMEOUT=$6    #time for fuzzing
+DELETE=$7
 
 WORKDIR="/root/experiments"
 
@@ -13,14 +14,19 @@ WORKDIR="/root/experiments"
 cids=()
 
 #create one container for each run
-for i in $(seq 1$RUNS); do
-  # Copy the local file ${PIT} to the container's WORKDIR
-  container_pit_path="${WORKDIR}/tasks/${PIT##*/}"
-  docker cp ${PIT} $DOCIMAGE:${container_pit_path}
+for i in $(seq 1 ${RUNS}); do
+
+  # 启动Docker容器
+  id=$(docker run --cpus=1 -itd ${DOCIMAGE} /bin/bash)
   
-  # Run the container and execute the script with the required arguments
-  id=$(docker run --cpus=1 -d -it $DOCIMAGE /bin/bash -c "cd ${WORKDIR} && ./${FUZZER}_parallel_out.sh ${TIMEOUT} ${container_pit_path}")
-  cids+=(${id::12}) #store only the first 12 characters of a container ID
+  # 将本地文件复制到Docker容器的指定位置
+  docker cp $PFBENCH/subjects/${PROTOCOL}/${DOCIMAGE}/${DOCIMAGE}_task.xml ${id}:${WORKDIR}/tasks/${DOCIMAGE}_task.xml
+  
+  # 在容器内执行测试脚本
+  docker exec -itd ${id} /bin/bash -c "cd ${WORKDIR} && ./${FUZZER}_out.sh ${TIMEOUT} ${DOCIMAGE}_task.xml"
+  
+  # 存储容器ID
+  cids+=(${id::12}) # 只存储容器ID的前12个字符
 done
 
 dlist="" #docker list
@@ -32,6 +38,9 @@ done
 printf "\n${FUZZER^^}: Fuzzing in progress ..."
 printf "\n${FUZZER^^}: Waiting for the following containers to stop: ${dlist}"
 docker wait ${dlist} > /dev/null
+for id in ${cids[@]}; do
+  docker wait $id > /dev/null
+done
 wait
 
 #collect the fuzzing results from the containers
@@ -41,8 +50,8 @@ for id in ${cids[@]}; do
   printf "\n${FUZZER^^}: Collecting results from container${id}"
   
   # Copy the 'branch' and 'logs' folders from the container to the local directory
-  docker cp ${id}:/root/experiments/branch${SAVETO}/${index}_branch
-  docker cp ${id}:/root/experiments/logs${SAVETO}/${index}_logs
+  docker cp ${id}:/root/experiments/branch ${SAVETO}/${FUZZER}_${index}_branch
+  docker cp ${id}:/root/experiments/logs ${SAVETO}/${FUZZER}_${index}_logs
   
   if [ ! -z $DELETE ]; then
     printf "\nDeleting ${id}"
