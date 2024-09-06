@@ -62,7 +62,7 @@ RUN AFL_TRACE_PC=1 make
 # 克隆 LightFTP 仓库
 WORKDIR /root
 
-COPY --chown=ubuntu:ubuntu collect.py /root/collect.py
+COPY --chown=ubuntu:ubuntu ../../collect.py /root/collect.py
 
 RUN mkdir experiments && \
     cd experiments && \
@@ -74,9 +74,8 @@ RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ A
 
 WORKDIR /root/experiments
 
-COPY --chown=ubuntu:ubuntu --chmod=755 peach_out.sh /root/experiments/peach_out.sh
-COPY --chown=ubuntu:ubuntu --chmod=755 peach_parallel_out.sh /root/experiments/peach_parallel_out.sh
-RUN mkdir tasks
+COPY --chown=ubuntu:ubuntu --chmod=755 peach_out.sh /root/experiments/run.sh
+RUN mkdir tasksrun
 
 RUN mkdir /home/user/
 RUN touch /home/user/fftplog
