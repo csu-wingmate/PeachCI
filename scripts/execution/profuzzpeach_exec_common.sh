@@ -12,25 +12,12 @@ WORKDIR="/root"
 #keep all container ids
 fids=() ## fuzzer container ids
 pids=() ## protocol container ids
-
-# 网络名称
-##NETWORK_NAME="my_network"
-
-# 检查网络是否存在
-##if ! docker network inspect $NETWORK_NAME &> /dev/null; then
-##    echo "Creating network: $NETWORK_NAME"
-##    docker network create --subnet=192.168.0.0/16 $NETWORK_NAME
-##else
-##    echo "Network $NETWORK_NAME already exists."
-##fi
-
 #create one container for each run
 for i in $(seq 1 ${RUNS}); do
 
   # 启动Docker容器
   fid=$(docker run --cpus=1 -itd ${FUZZER} /bin/bash)
-
-  pid=$(docker run --cpus=1 -itd -p 21 ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh")
+  pid=$(docker run --cpus=1 -itd ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh")
 
   # protocol的IP地址
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
@@ -54,6 +41,7 @@ for i in $(seq 1 ${RUNS}); do
   
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
+  pids+=(${pid::12}) # 只存储容器ID的前12个字符
 done
 
 flist="" #fuzzer docker list
@@ -81,17 +69,29 @@ for pid in ${pids[@]}; do
 done
 wait
 
-
 #collect the fuzzing results from the containers
 printf "\n${FUZZER^^}: Collecting results and save them to${SAVETO}"
 index=1
 ttime=`date +%Y-%m-%d-%T`
+for fid in ${fids[@]}; do
+  printf "\n${FUZZER^^}: Collecting results from container${fid}"
+  
+  # Copy the 'logs' folders from the container to the local directory
+  docker cp ${fid}:/root/logs${SAVETO}/${index}_logs_${ttime}
+
+  if [ ! -z $DELETE ]; then
+    printf "\nDeleting ${pid}"
+    docker rm ${fid} # Remove container now that we don't need it
+  fi
+  index=$((index+1))
+done
+
+index=1
 for pid in ${pids[@]}; do
   printf "\n${FUZZER^^}: Collecting results from container${pid}"
   
-  # Copy the 'branch' and 'logs' folders from the container to the local directory
-  docker cp ${pid}:/root/experiments/branch${SAVETO}/${index}_branch_${ttime}
-  docker cp ${pid}:/root/experiments/logs${SAVETO}/${index}_logs_${ttime}
+  # Copy the 'branch' folders from the container to the local directory
+  docker cp ${pid}:/root/branch${SAVETO}/${index}_branch_${ttime}
 
   if [ ! -z $DELETE ]; then
     printf "\nDeleting ${pid}"
@@ -99,6 +99,7 @@ for pid in ${pids[@]}; do
   fi
   index=$((index+1))
 done
+
 
 
 printf "\n${FUZZER^^}: I am done!\n"
