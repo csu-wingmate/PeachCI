@@ -37,7 +37,7 @@ for i in $(seq 1 ${RUNS}); do
   docker cp $PFBENCH/pits/${PROTOCOL}_task.xml ${fid}:${WORKDIR}/tasks/${PROTOCOL}_task.xml
 
   # 在容器内执行测试脚本
-  docker exec -itd ${fid} /bin/bash -c "timeout ${TIMEOUT} mono /root/${FUZZER}/bin/peach.exe  ${PROTOCOL}_task.xml &"
+  docker exec -itd ${fid} /bin/bash -c "timeout ${TIMEOUT} mono ${WORKDIR}/${FUZZER}/bin/peach.exe ${OPTIONS} ${PROTOCOL}_task.xml &"
   
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符

@@ -4,8 +4,21 @@
 #export MAKE_OPT="-j4"
 
 cd $PFBENCH
+cd fuzzer/Peach
+docker build . -t peach --build-arg MAKE_OPT $NO_CACHE
+
+cd $PFBENCH
+cd fuzzer/PeachStar
+docker build . -t peachstar --build-arg MAKE_OPT $NO_CACHE
+
+cd $PFBENCH
 cd subjects/FTP/lightftp
 docker build . -t lightftp --build-arg MAKE_OPT $NO_CACHE
 
+cd $PFBENCH
+cd subjects/HTTP/apachehttpd
+docker build . -t apachehttpd --build-arg MAKE_OPT $NO_CACHE
 
-
+cd $PFBENCH
+cd subjects/DNS/dnsmasq
+docker build . -t dnsmasq --build-arg MAKE_OPT $NO_CACHE
