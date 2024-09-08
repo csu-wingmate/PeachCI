@@ -28,7 +28,7 @@ for i in $(seq 1 ${RUNS}); do
     exit 1
   fi
   # XML文件路径
-  XML_FILE="$PFBENCH/pits/${PROTOCOL}_task.xml"
+  XML_FILE="$PFBENCH/pits/${PROTOCOL}.xml"
 
   # 使用sed命令替换Host参数的值
   sed -i "s|<Param name=\"Host\" value=\".*\"/>|<Param name=\"Host\" value=\"$EXTERNAL_IP\"/>|" $XML_FILE
