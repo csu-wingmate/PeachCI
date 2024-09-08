@@ -1,0 +1,164 @@
+<Peach>
+  <!-- HTTP GET 请求的数据模型 -->
+  <DataModel name="HttpRequestGet">
+    <String value="GET" />
+    <String value=" "/>
+    <String value="/index.html" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: localhost\r\n" />
+    <String value="User-Agent: PeachFuzzer\r\n" />
+    <String value="\r\n" />
+  </DataModel>
+
+  <!-- HTTP POST 请求的数据模型 -->
+  <DataModel name="HttpRequestPost">
+    <String value="POST" />
+    <String value=" "/>
+    <String value="/submit.php" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: localhost\r\n" />
+    <String value="Content-Type: application/x-www-form-urlencoded\r\n" />
+    <String value="Content-Length: " />
+    <Number name="ContentLength" size="32" signed="false" endian="big" />
+    <String value="\r\n" />
+    <String value="\r\n" />
+    <String name="PostData" value="key1:value1;key2:value2" />
+  </DataModel>
+
+  <!-- HTTP HEAD 请求的数据模型 -->
+  <DataModel name="HttpRequestHead">
+    <String value="HEAD" />
+    <String value=" "/>
+    <String value="/index.html" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: localhost\r\n" />
+    <String value="\r\n" />
+  </DataModel>
+
+  <!-- HTTP PUT 请求的数据模型 -->
+  <DataModel name="HttpRequestPut">
+    <String value="PUT" />
+    <String value=" "/>
+    <String value="/resource" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: localhost\r\n" />
+    <String value="Content-Type: application/octet-stream\r\n" />
+    <String value="Content-Length: 10\r\n" />
+    <String value="\r\n" />
+    <Block name="PutData">
+      <String value="0123456789" />
+    </Block>
+  </DataModel>
+
+  <!-- HTTP OPTIONS 请求的数据模型 -->
+  <DataModel name="HttpRequestOptions">
+    <String value="OPTIONS" />
+    <String value=" "/>
+    <String value="/index.html" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: localhost\r\n" />
+    <String value="\r\n" />
+  </DataModel>
+
+  <!-- HTTP TRACE 请求的数据模型 -->
+  <DataModel name="HttpRequestTrace">
+    <String value="TRACE" />
+    <String value=" "/>
+    <String value="/index.html" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: localhost\r\n" />
+    <String value="\r\n" />
+  </DataModel>
+ 
+  <!-- HTTP DELETE 请求的数据模型 -->
+  <DataModel name="HttpRequestDelete">
+    <String value="DELETE" />
+    <String value=" "/>
+    <String value="/resource" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: localhost\r\n" />
+    <String value="\r\n" />
+  </DataModel>
+
+<DataModel name="HttpRequestConnect">
+    <String value="CONNECT" />
+    <String value=" "/>
+    <String value="/resource" />
+    <String value=" HTTP/1.1\r\n" />
+    <String value="Host: hostname:port\r\n" />
+    <String value="User-Agent: agent-name\r\n" />
+    <String value="Proxy-Authorization: credentials\r\n" />
+    <String value="\r\n" />
+</DataModel>
+
+
+<!-- 状态模型，用于控制测试流程 -->
+  <StateModel name="HttpStateModel" initialState="Initial">
+    <State name="Initial">
+      <Action type="output">
+        <DataModel ref="HttpRequestGet" />
+      </Action>
+    </State>
+    <State name="PostRequest">
+      <Action type="output">
+        <DataModel ref="HttpRequestPost" />
+      </Action>
+    </State>
+    <State name="HeadRequest">
+      <Action type="output">
+        <DataModel ref="HttpRequestHead" />
+      </Action>
+    </State>
+    <State name="PutRequest">
+      <Action type="output">
+        <DataModel ref="HttpRequestPut" />
+      </Action>
+    </State>
+    <State name="OptionsRequest">
+      <Action type="output">
+        <DataModel ref="HttpRequestOptions" />
+      </Action>
+    </State>
+    <State name="TraceRequest">
+      <Action type="output">
+        <DataModel ref="HttpRequestTrace" />
+      </Action>
+    </State>
+    <State name="DeleteRequest">
+      <Action type="output">
+        <DataModel ref="HttpRequestDelete" />
+      </Action>
+    </State>
+    <State name="ConnectRequest">
+      <Action type="output">
+        <DataModel ref="HttpRequestConnect" />
+      </Action>
+    </State>
+
+  </StateModel>
+ <Agent name="LinAgent">
+    <Monitor class="Process">
+	 <Param name="Executable" value="/usr/local/apache2/bin/apachectl"/>
+	 <Param name="Arguments" value="-f /usr/local/apache2/conf/httpd_copy.conf -E /usr/local/apache2/logs/error_log1" />
+	   <Param name="RestartOnEachTest" value="true" />
+            <Param name="Faultonearlyexit" value="False" />
+    </Monitor>
+  </Agent>
+
+
+
+
+  <!-- 测试模型，关联状态模型和发布器 -->
+  <Test name="Default">
+	  <Agent ref="LinAgent" />
+    <StateModel ref="HttpStateModel"/>
+    <Publisher class="tcp.Tcp">
+      <Param name="Host" value="localhost" />
+      <Param name="Port" value="81" />
+    </Publisher>
+
+    <Logger class="File">
+      <Param name="Path" value="/root/protocolFuzz/http/peach/logs"/>
+    </Logger>
+  </Test>
+</Peach>
