@@ -56,7 +56,7 @@ RUN make
 
 # 切换到 llvm_mode 目录并编译
 WORKDIR /root/pcguard-cov/llvm_mode
-COPY --chown=ubuntu:ubuntu Makefile /root/pcguard-cov/llvm_mode/Makefile
+COPY --chown=ubuntu:ubuntu ../../Makefile /root/pcguard-cov/llvm_mode/Makefile
 RUN AFL_TRACE_PC=1 make
 
 # 克隆 LightFTP 仓库
@@ -64,18 +64,15 @@ WORKDIR /root
 
 COPY --chown=ubuntu:ubuntu ../../collect.py /root/collect.py
 
-RUN mkdir experiments && \
-    cd experiments && \
-    git clone http://github.com/hfiref0x/LightFTP.git LightFTP
+RUN git clone http://github.com/hfiref0x/LightFTP.git LightFTP
 
 # 切换到 LightFTP/Source/Release 目录并使用 afl-clang-fast 编译
-WORKDIR /root/experiments/LightFTP/Source/Release
+WORKDIR /root/LightFTP/Source/Release
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
 
-WORKDIR /root/experiments
 
-COPY --chown=ubuntu:ubuntu --chmod=755 peach_out.sh /root/experiments/run.sh
-RUN mkdir tasksrun
+WORKDIR /root
+COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 
 RUN mkdir /home/user/
 RUN touch /home/user/fftplog
