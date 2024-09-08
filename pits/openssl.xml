@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Peach xmlns="http://peachfuzzer.com/2012/Peach" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://peachfuzzer.com/2012/Peach ../peach.xsd">
+
+<DataModel name="dtls_record_1">
+  <Block name="dtls_record_1">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_8ac7"/>
+    <Number size="16" value="feff" valueType="hex" endian="little" name="dtls_record_version_57d1"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_1f5a"/>
+    <Blob valueType="hex" value="000000000000" name="dtls_record_sequence_number_97bb" size="48"/>
+    <Number size="16" value="00c6" valueType="hex" endian="little" name="dtls_record_length_4189"/>
+    <Block name="dtls_handshake_9dbe">
+      <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_type_e576"/>
+      <Blob valueType="hex" value="0000ba" name="dtls_handshake_length_ce01" size="24"/>
+      <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_message_seq_fdbd"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_3815" size="24"/>
+      <Blob valueType="hex" value="0000ba" name="dtls_handshake_fragment_length_7520" size="24"/>
+      <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_handshake_version_21d8"/>
+      <Block name="dtls_handshake_random_653a">
+        <Blob valueType="hex" value="8bca3174" name="dtls_handshake_random_time_a617" size="32"/>
+        <Blob valueType="hex" value="dd663c5ff19c06a45924eb81caccef5d1b8e8e1dd6017da6fcdeff3b" name="dtls_handshake_random_bytes_685c" size="224"/>
+      </Block>
+      <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_session_id_length_fec1"/>
+      <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_cookie_length_3051"/>
+      <Number size="16" value="0038" valueType="hex" endian="little" name="dtls_handshake_cipher_suites_length_6d4a"/>
+      <Block name="dtls_handshake_ciphersuites_4151">
+        <Number size="16" value="c02c" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_6915"/>
+        <Number size="16" value="c030" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_4e83"/>
+        <Number size="16" value="009f" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_1c7b"/>
+        <Number size="16" value="cca9" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_9d5b"/>
+        <Number size="16" value="cca8" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_36ec"/>
+        <Number size="16" value="ccaa" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_a9fb"/>
+        <Number size="16" value="c02b" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_9d37"/>
+        <Number size="16" value="c02f" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_4297"/>
+        <Number size="16" value="009e" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_1096"/>
+        <Number size="16" value="c024" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_1795"/>
+        <Number size="16" value="c028" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_fdae"/>
+        <Number size="16" value="006b" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_7ad7"/>
+        <Number size="16" value="c023" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_9d7f"/>
+        <Number size="16" value="c027" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_7b60"/>
+        <Number size="16" value="0067" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_675b"/>
+        <Number size="16" value="c00a" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_329a"/>
+        <Number size="16" value="c014" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_f1a1"/>
+        <Number size="16" value="0039" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_03c2"/>
+        <Number size="16" value="c009" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_43f5"/>
+        <Number size="16" value="c013" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_2422"/>
+        <Number size="16" value="0033" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_73a4"/>
+        <Number size="16" value="009d" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_be27"/>
+        <Number size="16" value="009c" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_9c86"/>
+        <Number size="16" value="003d" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_3f12"/>
+        <Number size="16" value="003c" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_dca8"/>
+        <Number size="16" value="0035" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_c6fa"/>
+        <Number size="16" value="002f" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_d1c1"/>
+        <Number size="16" value="00ff" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_96f2"/>
+      </Block>
+      <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_comp_methods_length_712d"/>
+      <Block name="dtls_handshake_comp_methods_b970">
+        <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_comp_method_aef7"/>
+      </Block>
+      <Number size="16" value="0058" valueType="hex" endian="little" name="dtls_handshake_extensions_length_c1df"/>
+      <Block name="Extension: ec_point_formats (len=4)_d7f1">
+        <Number size="16" value="000b" valueType="hex" endian="little" name="dtls_handshake_extension_type_9fc9"/>
+        <Number size="16" value="0004" valueType="hex" endian="little" name="dtls_handshake_extension_len_3f78"/>
+        <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_formats_length_23f6"/>
+        <Block name="dtls_handshake_extensions_ec_point_formats_ff1a">
+          <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_6a24"/>
+          <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_7bc7"/>
+          <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_ab0c"/>
+        </Block>
+      </Block>
+      <Block name="Extension: supported_groups (len=12)_2613">
+        <Number size="16" value="000a" valueType="hex" endian="little" name="dtls_handshake_extension_type_bbac"/>
+        <Number size="16" value="000c" valueType="hex" endian="little" name="dtls_handshake_extension_len_8acd"/>
+        <Number size="16" value="000a" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_groups_length_67e6"/>
+        <Block name="dtls_handshake_extensions_supported_groups_5949">
+          <Number size="16" value="001d" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_32a9"/>
+          <Number size="16" value="0017" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_e563"/>
+          <Number size="16" value="001e" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_ec00"/>
+          <Number size="16" value="0019" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_e303"/>
+          <Number size="16" value="0018" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_bc5b"/>
+        </Block>
+      </Block>
+      <Block name="Extension: session_ticket (len=0)_7ad9">
+        <Number size="16" value="0023" valueType="hex" endian="little" name="dtls_handshake_extension_type_8bcf"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_d211"/>
+        <Blob valueType="hex" value="" name="dtls_handshake_extension_data_0e9b" size="0"/>
+      </Block>
+      <Block name="Extension: encrypt_then_mac (len=0)_7ba9">
+        <Number size="16" value="0016" valueType="hex" endian="little" name="dtls_handshake_extension_type_3a27"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_cafd"/>
+      </Block>
+      <Block name="Extension: extended_master_secret (len=0)_a8eb">
+        <Number size="16" value="0017" valueType="hex" endian="little" name="dtls_handshake_extension_type_52af"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_6046"/>
+      </Block>
+      <Block name="Extension: signature_algorithms (len=48)_61ff">
+        <Number size="16" value="000d" valueType="hex" endian="little" name="dtls_handshake_extension_type_dc00"/>
+        <Number size="16" value="0030" valueType="hex" endian="little" name="dtls_handshake_extension_len_0040"/>
+        <Number size="16" value="002e" valueType="hex" endian="little" name="dtls_handshake_sig_hash_alg_len_76ae"/>
+        <Block name="dtls_handshake_sig_hash_algs_0f18">
+          <Block name="dtls_handshake_sig_hash_alg_f24e">
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_eb78"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_5ef6"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_53bb">
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_c991"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_420e"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_7321">
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_5018"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_18d8"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_588c">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_569c"/>
+            <Number size="8" value="07" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_c22e"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_d43c">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_003a"/>
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_9764"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_342b">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_e281"/>
+            <Number size="8" value="1a" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_dee2"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_3c2c">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_4f88"/>
+            <Number size="8" value="1b" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_4b3e"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_8bd3">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_5983"/>
+            <Number size="8" value="1c" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_99b2"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_e963">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_8a9a"/>
+            <Number size="8" value="09" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_4b55"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_f292">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_dfac"/>
+            <Number size="8" value="0a" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_d8b8"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_f9ff">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_7422"/>
+            <Number size="8" value="0b" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_b2d4"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_61f3">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_2f05"/>
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_1b33"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_388e">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_986d"/>
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_238f"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_7912">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_dfae"/>
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_9799"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_d25e">
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_6fd4"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_f681"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_6766">
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_9742"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_643f"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_35ef">
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_ca93"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_bcb5"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_71bf">
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_a6dc"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_9fc5"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_fa93">
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_ff36"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_c4c4"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_1e15">
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_0f24"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_fdd5"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_963c">
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_fa27"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_08f8"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_838a">
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_0b97"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_eacf"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_0130">
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_a214"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_0ef1"/>
+          </Block>
+        </Block>
+      </Block>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_2">
+  <Block name="dtls_record_2">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_6456"/>
+    <Number size="16" value="feff" valueType="hex" endian="little" name="dtls_record_version_7fd3"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_2ff2"/>
+    <Blob valueType="hex" value="000000000000" name="dtls_record_sequence_number_2db9" size="48"/>
+    <Number size="16" value="0023" valueType="hex" endian="little" name="dtls_record_length_f540"/>
+    <Block name="dtls_handshake_8563">
+      <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_type_c91f"/>
+      <Blob valueType="hex" value="000017" name="dtls_handshake_length_cdd0" size="24"/>
+      <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_message_seq_8282"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_25a6" size="24"/>
+      <Blob valueType="hex" value="000017" name="dtls_handshake_fragment_length_669c" size="24"/>
+      <Number size="16" value="feff" valueType="hex" endian="little" name="dtls_handshake_version_976b"/>
+      <Number size="8" value="14" valueType="hex" endian="little" name="dtls_handshake_cookie_length_2b1c"/>
+      <Blob valueType="hex" value="9e770509e26ef9053a6b750cc1b838882c86b6e8" name="dtls_handshake_cookie_48a6" size="160"/>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_3">
+  <Block name="dtls_record_3">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_5331"/>
+    <Number size="16" value="feff" valueType="hex" endian="little" name="dtls_record_version_d640"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_dfc3"/>
+    <Blob valueType="hex" value="000000000001" name="dtls_record_sequence_number_b434" size="48"/>
+    <Number size="16" value="00da" valueType="hex" endian="little" name="dtls_record_length_9316"/>
+    <Block name="dtls_handshake_f205">
+      <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_type_c301"/>
+      <Blob valueType="hex" value="0000ce" name="dtls_handshake_length_1334" size="24"/>
+      <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_handshake_message_seq_9cf9"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_1192" size="24"/>
+      <Blob valueType="hex" value="0000ce" name="dtls_handshake_fragment_length_90e1" size="24"/>
+      <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_handshake_version_4c2f"/>
+      <Block name="dtls_handshake_random_7e96">
+        <Blob valueType="hex" value="8bca3174" name="dtls_handshake_random_time_d58d" size="32"/>
+        <Blob valueType="hex" value="dd663c5ff19c06a45924eb81caccef5d1b8e8e1dd6017da6fcdeff3b" name="dtls_handshake_random_bytes_4bc0" size="224"/>
+      </Block>
+      <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_session_id_length_0b97"/>
+      <Number size="8" value="14" valueType="hex" endian="little" name="dtls_handshake_cookie_length_ba5d"/>
+      <Blob valueType="hex" value="9e770509e26ef9053a6b750cc1b838882c86b6e8" name="dtls_handshake_cookie_4247" size="160"/>
+      <Number size="16" value="0038" valueType="hex" endian="little" name="dtls_handshake_cipher_suites_length_dae4"/>
+      <Block name="dtls_handshake_ciphersuites_a6df">
+        <Number size="16" value="c02c" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_1a50"/>
+        <Number size="16" value="c030" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_75b6"/>
+        <Number size="16" value="009f" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_49d8"/>
+        <Number size="16" value="cca9" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_e439"/>
+        <Number size="16" value="cca8" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_0f36"/>
+        <Number size="16" value="ccaa" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_ec38"/>
+        <Number size="16" value="c02b" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_828d"/>
+        <Number size="16" value="c02f" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_e104"/>
+        <Number size="16" value="009e" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_b90c"/>
+        <Number size="16" value="c024" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_0a18"/>
+        <Number size="16" value="c028" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_7faa"/>
+        <Number size="16" value="006b" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_d602"/>
+        <Number size="16" value="c023" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_6a69"/>
+        <Number size="16" value="c027" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_6bb2"/>
+        <Number size="16" value="0067" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_6a50"/>
+        <Number size="16" value="c00a" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_ca3e"/>
+        <Number size="16" value="c014" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_b32b"/>
+        <Number size="16" value="0039" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_8e68"/>
+        <Number size="16" value="c009" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_8f95"/>
+        <Number size="16" value="c013" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_8b47"/>
+        <Number size="16" value="0033" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_93ee"/>
+        <Number size="16" value="009d" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_2e7b"/>
+        <Number size="16" value="009c" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_1862"/>
+        <Number size="16" value="003d" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_032f"/>
+        <Number size="16" value="003c" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_561b"/>
+        <Number size="16" value="0035" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_8214"/>
+        <Number size="16" value="002f" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_7052"/>
+        <Number size="16" value="00ff" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_976c"/>
+      </Block>
+      <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_comp_methods_length_3840"/>
+      <Block name="dtls_handshake_comp_methods_a9e2">
+        <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_comp_method_4588"/>
+      </Block>
+      <Number size="16" value="0058" valueType="hex" endian="little" name="dtls_handshake_extensions_length_6aef"/>
+      <Block name="Extension: ec_point_formats (len=4)_b4b5">
+        <Number size="16" value="000b" valueType="hex" endian="little" name="dtls_handshake_extension_type_6c07"/>
+        <Number size="16" value="0004" valueType="hex" endian="little" name="dtls_handshake_extension_len_5a16"/>
+        <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_formats_length_a5c6"/>
+        <Block name="dtls_handshake_extensions_ec_point_formats_18d0">
+          <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_eab1"/>
+          <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_8070"/>
+          <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_0e43"/>
+        </Block>
+      </Block>
+      <Block name="Extension: supported_groups (len=12)_a0fa">
+        <Number size="16" value="000a" valueType="hex" endian="little" name="dtls_handshake_extension_type_9268"/>
+        <Number size="16" value="000c" valueType="hex" endian="little" name="dtls_handshake_extension_len_bcbd"/>
+        <Number size="16" value="000a" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_groups_length_1d84"/>
+        <Block name="dtls_handshake_extensions_supported_groups_1f1f">
+          <Number size="16" value="001d" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_cbbf"/>
+          <Number size="16" value="0017" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_3f0b"/>
+          <Number size="16" value="001e" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_8106"/>
+          <Number size="16" value="0019" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_2efb"/>
+          <Number size="16" value="0018" valueType="hex" endian="little" name="dtls_handshake_extensions_supported_group_4182"/>
+        </Block>
+      </Block>
+      <Block name="Extension: session_ticket (len=0)_6c6a">
+        <Number size="16" value="0023" valueType="hex" endian="little" name="dtls_handshake_extension_type_3fe5"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_e785"/>
+        <Blob valueType="hex" value="" name="dtls_handshake_extension_data_2179" size="0"/>
+      </Block>
+      <Block name="Extension: encrypt_then_mac (len=0)_6287">
+        <Number size="16" value="0016" valueType="hex" endian="little" name="dtls_handshake_extension_type_d470"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_a4db"/>
+      </Block>
+      <Block name="Extension: extended_master_secret (len=0)_eeef">
+        <Number size="16" value="0017" valueType="hex" endian="little" name="dtls_handshake_extension_type_c643"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_0cf2"/>
+      </Block>
+      <Block name="Extension: signature_algorithms (len=48)_8caa">
+        <Number size="16" value="000d" valueType="hex" endian="little" name="dtls_handshake_extension_type_381c"/>
+        <Number size="16" value="0030" valueType="hex" endian="little" name="dtls_handshake_extension_len_a8fb"/>
+        <Number size="16" value="002e" valueType="hex" endian="little" name="dtls_handshake_sig_hash_alg_len_4455"/>
+        <Block name="dtls_handshake_sig_hash_algs_3c0d">
+          <Block name="dtls_handshake_sig_hash_alg_39e7">
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_2002"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_51d1"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_bddc">
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_596e"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_c3b4"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_98cd">
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_1659"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_454e"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_d17f">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_94b4"/>
+            <Number size="8" value="07" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_f50a"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_037f">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_d8ba"/>
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_fa7e"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_f55c">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_e637"/>
+            <Number size="8" value="1a" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_3e4d"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_9564">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_c240"/>
+            <Number size="8" value="1b" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_8cd9"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_31d6">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_29d1"/>
+            <Number size="8" value="1c" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_cc79"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_6227">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_2ef9"/>
+            <Number size="8" value="09" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_5b1a"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_70b7">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_bd3c"/>
+            <Number size="8" value="0a" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_ab1b"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_1601">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_a405"/>
+            <Number size="8" value="0b" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_333b"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_c9c9">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_a93d"/>
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_fc09"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_46a3">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_0658"/>
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_abcd"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_2da5">
+            <Number size="8" value="08" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_9401"/>
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_2acb"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_328e">
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_99a4"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_7624"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_2d45">
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_5c6e"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_542a"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_9fa7">
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_1ee7"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_97f5"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_075a">
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_8f19"/>
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_b98e"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_ff0d">
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_45a1"/>
+            <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_b63a"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_1a55">
+            <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_0599"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_fa11"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_f5a7">
+            <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_d07a"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_5b7d"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_77d2">
+            <Number size="8" value="05" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_06e8"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_5d6c"/>
+          </Block>
+          <Block name="dtls_handshake_sig_hash_alg_a40e">
+            <Number size="8" value="06" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_4629"/>
+            <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_a401"/>
+          </Block>
+        </Block>
+      </Block>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_4">
+  <Block name="dtls_record_4">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_c8e0"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_3d10"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_e5df"/>
+    <Blob valueType="hex" value="000000000001" name="dtls_record_sequence_number_4d57" size="48"/>
+    <Number size="16" value="0049" valueType="hex" endian="little" name="dtls_record_length_20fb"/>
+    <Block name="dtls_handshake_9bbd">
+      <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_type_f0fd"/>
+      <Blob valueType="hex" value="00003d" name="dtls_handshake_length_a41d" size="24"/>
+      <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_handshake_message_seq_d8c3"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_37b1" size="24"/>
+      <Blob valueType="hex" value="00003d" name="dtls_handshake_fragment_length_9c61" size="24"/>
+      <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_handshake_version_c64b"/>
+      <Block name="dtls_handshake_random_ff23">
+        <Blob valueType="hex" value="c181b4b3" name="dtls_handshake_random_time_3362" size="32"/>
+        <Blob valueType="hex" value="ea4a0e3dcfceeebd8255c6346583e0f91c21a987e4ec618a5e96fe47" name="dtls_handshake_random_bytes_0caf" size="224"/>
+      </Block>
+      <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_session_id_length_f566"/>
+      <Number size="16" value="c02c" valueType="hex" endian="little" name="dtls_handshake_ciphersuite_52f7"/>
+      <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_comp_method_d864"/>
+      <Number size="16" value="0015" valueType="hex" endian="little" name="dtls_handshake_extensions_length_1da5"/>
+      <Block name="Extension: renegotiation_info (len=1)_9372">
+        <Number size="16" value="ff01" valueType="hex" endian="little" name="dtls_handshake_extension_type_8dc3"/>
+        <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_handshake_extension_len_221a"/>
+        <Block name="Renegotiation Info extension_c572">
+          <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_extensions_reneg_info_len_0c9a"/>
+        </Block>
+      </Block>
+      <Block name="Extension: ec_point_formats (len=4)_d2ea">
+        <Number size="16" value="000b" valueType="hex" endian="little" name="dtls_handshake_extension_type_cd62"/>
+        <Number size="16" value="0004" valueType="hex" endian="little" name="dtls_handshake_extension_len_3991"/>
+        <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_formats_length_7bbd"/>
+        <Block name="dtls_handshake_extensions_ec_point_formats_4d98">
+          <Number size="8" value="00" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_2f54"/>
+          <Number size="8" value="01" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_2f3a"/>
+          <Number size="8" value="02" valueType="hex" endian="little" name="dtls_handshake_extensions_ec_point_format_1d32"/>
+        </Block>
+      </Block>
+      <Block name="Extension: session_ticket (len=0)_8f35">
+        <Number size="16" value="0023" valueType="hex" endian="little" name="dtls_handshake_extension_type_d7f0"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_2473"/>
+        <Blob valueType="hex" value="" name="dtls_handshake_extension_data_cf08" size="0"/>
+      </Block>
+      <Block name="Extension: extended_master_secret (len=0)_4297">
+        <Number size="16" value="0017" valueType="hex" endian="little" name="dtls_handshake_extension_type_b139"/>
+        <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_handshake_extension_len_0542"/>
+      </Block>
+    </Block>
+  </Block>
+  <Block name="dtls_record_4_2">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_68c9"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_378f"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_1bb3"/>
+    <Blob valueType="hex" value="000000000002" name="dtls_record_sequence_number_279f" size="48"/>
+    <Number size="16" value="0081" valueType="hex" endian="little" name="dtls_record_length_951a"/>
+    <Block name="dtls_handshake_8970">
+      <Number size="8" value="0b" valueType="hex" endian="little" name="dtls_handshake_type_e4a2"/>
+      <Blob valueType="hex" value="0001fc" name="dtls_handshake_length_2644" size="24"/>
+      <Number size="16" value="0002" valueType="hex" endian="little" name="dtls_handshake_message_seq_c3a6"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_2a9c" size="24"/>
+      <Blob valueType="hex" value="000075" name="dtls_handshake_fragment_length_b922" size="24"/>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_5">
+  <Block name="dtls_record_5">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_0922"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_bd83"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_c566"/>
+    <Blob valueType="hex" value="000000000003" name="dtls_record_sequence_number_f127" size="48"/>
+    <Number size="16" value="00d7" valueType="hex" endian="little" name="dtls_record_length_b8f6"/>
+    <Block name="dtls_handshake_84ee">
+      <Number size="8" value="0b" valueType="hex" endian="little" name="dtls_handshake_type_9bef"/>
+      <Blob valueType="hex" value="0001fc" name="dtls_handshake_length_a4cb" size="24"/>
+      <Number size="16" value="0002" valueType="hex" endian="little" name="dtls_handshake_message_seq_c6c4"/>
+      <Blob valueType="hex" value="000075" name="dtls_handshake_fragment_offset_65dc" size="24"/>
+      <Blob valueType="hex" value="0000cb" name="dtls_handshake_fragment_length_6744" size="24"/>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_6">
+  <Block name="dtls_record_6">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_5f53"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_cd6b"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_ced6"/>
+    <Blob valueType="hex" value="000000000004" name="dtls_record_sequence_number_2c84" size="48"/>
+    <Number size="16" value="00c8" valueType="hex" endian="little" name="dtls_record_length_b7da"/>
+    <Block name="dtls_handshake_6762">
+      <Number size="8" value="0b" valueType="hex" endian="little" name="dtls_handshake_type_557a"/>
+      <Blob valueType="hex" value="0001fc" name="dtls_handshake_length_0d8a" size="24"/>
+      <Number size="16" value="0002" valueType="hex" endian="little" name="dtls_handshake_message_seq_f499"/>
+      <Blob valueType="hex" value="000140" name="dtls_handshake_fragment_offset_bfd0" size="24"/>
+      <Blob valueType="hex" value="0000bc" name="dtls_handshake_fragment_length_3107" size="24"/>
+      <Blob valueType="hex" value="0001f9" name="dtls_handshake_certificates_length_437a" size="24"/>
+      <Block name="dtls_handshake_certificates_5b59">
+        <Blob valueType="hex" value="0001f6" name="dtls_handshake_certificate_length_9347" size="24"/>
+        <Block name="dtls_handshake_certificate_dd63">
+          <Block name="x509af_signedCertificate_element_c1e6">
+            <Blob valueType="hex" value="64ea16985734739d307d97cd76f0f8ecf9e1aa42" name="x509af_serialNumber_d2fc" size="160"/>
+            <Block name="x509af_signature_element_bffe">
+              <Blob valueType="hex" value="2a8648ce3d040302" name="x509af_algorithm_id_b9b3" size="64"/>
+            </Block>
+            <Block name="x509af_issuer_29f8">
+              <Block name="x509if_rdnSequence_b0cb">
+                <Block name="x509if_RDNSequence_item_604a">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_82f7">
+                    <Blob valueType="hex" value="550406" name="x509if_id_d266" size="24"/>
+                    <Blob valueType="hex" value="434e" name="x509sat_CountryName_09f7" size="16"/>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_f42c">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_101c">
+                    <Blob valueType="hex" value="550408" name="x509if_id_62f9" size="24"/>
+                    <Block name="x509sat_DirectoryString_94b3">
+                      <Blob valueType="hex" value="4265696a696e67" name="x509sat_uTF8String_0cff" size="56"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_2eb5">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_63c9">
+                    <Blob valueType="hex" value="550407" name="x509if_id_bb5c" size="24"/>
+                    <Block name="x509sat_DirectoryString_40ef">
+                      <Blob valueType="hex" value="4265696a696e67" name="x509sat_uTF8String_6515" size="56"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_5bdc">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_00c5">
+                    <Blob valueType="hex" value="55040a" name="x509if_id_18dc" size="24"/>
+                    <Block name="x509sat_DirectoryString_5d13">
+                      <Blob valueType="hex" value="74657374" name="x509sat_uTF8String_a158" size="32"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_21d7">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_150c">
+                    <Blob valueType="hex" value="55040b" name="x509if_id_f304" size="24"/>
+                    <Block name="x509sat_DirectoryString_26e4">
+                      <Blob valueType="hex" value="74657374" name="x509sat_uTF8String_c393" size="32"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_661c">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_1bab">
+                    <Blob valueType="hex" value="550403" name="x509if_id_9e2f" size="24"/>
+                    <Block name="x509sat_DirectoryString_c0cf">
+                      <Blob valueType="hex" value="74657374" name="x509sat_uTF8String_3f6a" size="32"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_b911">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_68bc">
+                    <Blob valueType="hex" value="2a864886f70d010901" name="x509if_id_ac33" size="72"/>
+                    <Blob valueType="hex" value="7465737440746573742e636f6d" name="x509sat_IA5String_287a" size="104"/>
+                  </Block>
+                </Block>
+              </Block>
+            </Block>
+            <Block name="x509af_validity_element_a00c">
+              <Block name="x509af_notBefore_8d7d">
+                <Blob valueType="hex" value="3231313131363133303232385a" name="x509af_utcTime_f5be" size="104"/>
+              </Block>
+              <Block name="x509af_notAfter_99f4">
+                <Blob valueType="hex" value="3232313131363133303232385a" name="x509af_utcTime_16ad" size="104"/>
+              </Block>
+            </Block>
+            <Block name="x509af_subject_2092">
+              <Block name="x509af_rdnSequence_421e">
+                <Block name="x509if_RDNSequence_item_0fb8">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_c97a">
+                    <Blob valueType="hex" value="550406" name="x509if_id_6b60" size="24"/>
+                    <Blob valueType="hex" value="434e" name="x509sat_CountryName_733c" size="16"/>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_7ba6">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_2793">
+                    <Blob valueType="hex" value="550408" name="x509if_id_4879" size="24"/>
+                    <Block name="x509sat_DirectoryString_1615">
+                      <Blob valueType="hex" value="4265696a696e67" name="x509sat_uTF8String_a73f" size="56"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_1c53">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_d532">
+                    <Blob valueType="hex" value="550407" name="x509if_id_e524" size="24"/>
+                    <Block name="x509sat_DirectoryString_a414">
+                      <Blob valueType="hex" value="4265696a696e67" name="x509sat_uTF8String_7de4" size="56"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_6754">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_b200">
+                    <Blob valueType="hex" value="55040a" name="x509if_id_c1df" size="24"/>
+                    <Block name="x509sat_DirectoryString_a652">
+                      <Blob valueType="hex" value="74657374" name="x509sat_uTF8String_2382" size="32"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_2923">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_fc69">
+                    <Blob valueType="hex" value="55040b" name="x509if_id_76df" size="24"/>
+                    <Block name="x509sat_DirectoryString_29e4">
+                      <Blob valueType="hex" value="74657374" name="x509sat_uTF8String_ed11" size="32"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_e15f">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_e91f">
+                    <Blob valueType="hex" value="550403" name="x509if_id_308b" size="24"/>
+                    <Block name="x509sat_DirectoryString_0aca">
+                      <Blob valueType="hex" value="74657374" name="x509sat_uTF8String_f4de" size="32"/>
+                    </Block>
+                  </Block>
+                </Block>
+                <Block name="x509if_RDNSequence_item_e8e2">
+                  <Block name="x509if_RelativeDistinguishedName_item_element_a222">
+                    <Blob valueType="hex" value="2a864886f70d010901" name="x509if_id_a5a4" size="72"/>
+                    <Blob valueType="hex" value="7465737440746573742e636f6d" name="x509sat_IA5String_d4af" size="104"/>
+                  </Block>
+                </Block>
+              </Block>
+            </Block>
+            <Block name="x509af_subjectPublicKeyInfo_element_95f3">
+              <Block name="x509af_algorithm_element_795b">
+                <Blob valueType="hex" value="2a8648ce3d0201" name="x509af_algorithm_id_99bb" size="56"/>
+                <Block name="pkcs1_ECParameters_95df">
+                  <Blob valueType="hex" value="2a8648ce3d030107" name="pkcs1_namedCurve_ac87" size="64"/>
+                </Block>
+              </Block>
+              <Number size="8" value="00" valueType="hex" endian="little" name="ber_bitstring_padding_3c12"/>
+              <Blob valueType="hex" value="0407f20c2c9af6f33a50ec7f5e2a7dcbe48f54f4f988fecdd506c64e277550eb26ee83f9db6202b55d0072b7cf8b569213d2422e43b5a72f08d848d35f78918231" name="x509af_subjectPublicKey_0ed6" size="520"/>
+            </Block>
+          </Block>
+          <Block name="x509af_algorithmIdentifier_element_6938">
+            <Blob valueType="hex" value="2a8648ce3d040302" name="x509af_algorithm_id_0a9d" size="64"/>
+          </Block>
+          <Number size="8" value="00" valueType="hex" endian="little" name="ber_bitstring_padding_dfc6"/>
+          <Blob valueType="hex" value="30440220420887bf78863f4fd0fc2e06cd4daf23d039a2e193e303d1295197cf1e29c177022065c0fd527336f3984c90900403044f7bfde9656bb2bdc2eec50e11bbf3b566e6" name="x509af_encrypted_6021" size="560"/>
+        </Block>
+      </Block>
+    </Block>
+    <Block name="dtls_fragments_7e85">
+      <Blob valueType="hex" value="0001f90001f6308201f230820199021464ea16985734739d307d97cd76f0f8ecf9e1aa42300a06082a8648ce3d040302307c310b300906035504061302434e3110300e06035504080c074265696a696e673110300e06035504070c074265696a696e67310d300b060355040a0c0474657374310d30" name="dtls_fragment_7129" size="936"/>
+      <Blob valueType="hex" value="0b060355040b0c0474657374310d300b06035504030c0474657374311c301a06092a864886f70d010901160d7465737440746573742e636f6d301e170d3231313131363133303232385a170d3232313131363133303232385a307c310b300906035504061302434e3110300e06035504080c074265696a696e673110300e06035504070c074265696a696e67310d300b060355040a0c0474657374310d300b060355040b0c0474657374310d300b06035504030c0474657374311c301a06092a864886f70d010901160d74" name="dtls_fragment_36bd" size="1624"/>
+      <Blob valueType="hex" value="65737440746573742e636f6d3059301306072a8648ce3d020106082a8648ce3d0301070342000407f20c2c9af6f33a50ec7f5e2a7dcbe48f54f4f988fecdd506c64e277550eb26ee83f9db6202b55d0072b7cf8b569213d2422e43b5a72f08d848d35f78918231300a06082a8648ce3d04030203470030440220420887bf78863f4fd0fc2e06cd4daf23d039a2e193e303d1295197cf1e29c177022065c0fd527336f3984c90900403044f7bfde9656bb2bdc2eec50e11bbf3b566e6" name="dtls_fragment_d4ca" size="1504"/>
+      <Blob valueType="hex" value="" name="dtls_fragment_count_99bd" size="0"/>
+      <Blob valueType="hex" value="" name="dtls_reassembled_length_1097" size="0"/>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_7">
+  <Block name="dtls_record_7">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_061f"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_8151"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_543e"/>
+    <Blob valueType="hex" value="000000000005" name="dtls_record_sequence_number_7931" size="48"/>
+    <Number size="16" value="007b" valueType="hex" endian="little" name="dtls_record_length_85f0"/>
+    <Block name="dtls_handshake_aa8a">
+      <Number size="8" value="0c" valueType="hex" endian="little" name="dtls_handshake_type_70d5"/>
+      <Blob valueType="hex" value="00006f" name="dtls_handshake_length_82e4" size="24"/>
+      <Number size="16" value="0003" valueType="hex" endian="little" name="dtls_handshake_message_seq_2b6b"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_5c71" size="24"/>
+      <Blob valueType="hex" value="00006f" name="dtls_handshake_fragment_length_9088" size="24"/>
+      <Block name="EC Diffie-Hellman Server Params_36f9">
+        <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_server_curve_type_f3ba"/>
+        <Number size="16" value="001d" valueType="hex" endian="little" name="dtls_handshake_server_named_curve_95a1"/>
+        <Number size="8" value="20" valueType="hex" endian="little" name="dtls_handshake_server_point_len_44f2"/>
+        <Blob valueType="hex" value="263a1e17d42459b45bbc6f89ba17979fdff969ff76a2504a9c6dad9849827d49" name="dtls_handshake_server_point_5cbd" size="256"/>
+        <Block name="dtls_handshake_sig_hash_alg_9b1a">
+          <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_sig_hash_hash_d947"/>
+          <Number size="8" value="03" valueType="hex" endian="little" name="dtls_handshake_sig_hash_sig_b0ef"/>
+        </Block>
+        <Number size="16" value="0047" valueType="hex" endian="little" name="dtls_handshake_sig_len_d71f"/>
+        <Blob valueType="hex" value="3045022057fed9b35347ea3fdc732eb83231ef68a57f4f7237a765bdd6ce64ff3ded1e77022100cafa061b295e8112d9a1747d354deca9ee91dcd0edd1eba0519b0cb017c0b3fe" name="dtls_handshake_sig_e679" size="568"/>
+      </Block>
+    </Block>
+  </Block>
+  <Block name="dtls_record_b4b3">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_c777"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_9e05"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_4781"/>
+    <Blob valueType="hex" value="000000000006" name="dtls_record_sequence_number_b575" size="48"/>
+    <Number size="16" value="000c" valueType="hex" endian="little" name="dtls_record_length_8bcc"/>
+    <Block name="dtls_handshake_20ac">
+      <Number size="8" value="0e" valueType="hex" endian="little" name="dtls_handshake_type_aadb"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_length_d83f" size="24"/>
+      <Number size="16" value="0004" valueType="hex" endian="little" name="dtls_handshake_message_seq_4c6b"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_cb5e" size="24"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_length_5b05" size="24"/>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_8">
+  <Block name="dtls_record_8">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_e77c"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_3353"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_4864"/>
+    <Blob valueType="hex" value="000000000002" name="dtls_record_sequence_number_0d66" size="48"/>
+    <Number size="16" value="002d" valueType="hex" endian="little" name="dtls_record_length_960a"/>
+    <Block name="dtls_handshake_7eea">
+      <Number size="8" value="10" valueType="hex" endian="little" name="dtls_handshake_type_f0bd"/>
+      <Blob valueType="hex" value="000021" name="dtls_handshake_length_54ed" size="24"/>
+      <Number size="16" value="0002" valueType="hex" endian="little" name="dtls_handshake_message_seq_472a"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_c076" size="24"/>
+      <Blob valueType="hex" value="000021" name="dtls_handshake_fragment_length_52ac" size="24"/>
+      <Block name="EC Diffie-Hellman Client Params_6303">
+        <Number size="8" value="20" valueType="hex" endian="little" name="dtls_handshake_client_point_len_184a"/>
+        <Blob valueType="hex" value="d0ba7034f67d2fe0aedba7898c59196b56f788cd9f2a79b751336de1f42b5b32" name="dtls_handshake_client_point_6a00" size="256"/>
+      </Block>
+    </Block>
+  </Block>
+  <Block name="dtls_record_905a">
+    <Number size="8" value="14" valueType="hex" endian="little" name="dtls_record_content_type_7660"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_7658"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_7c96"/>
+    <Blob valueType="hex" value="000000000003" name="dtls_record_sequence_number_a3aa" size="48"/>
+    <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_record_length_0c4d"/>
+    <Blob valueType="hex" value="" name="dtls_change_cipher_spec_2917" size="0"/>
+  </Block>
+  <Block name="dtls_record_4a21">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_140b"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_69ae"/>
+    <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_record_epoch_e3c0"/>
+    <Blob valueType="hex" value="000000000000" name="dtls_record_sequence_number_9408" size="48"/>
+    <Number size="16" value="0030" valueType="hex" endian="little" name="dtls_record_length_750e"/>
+    <Blob valueType="hex" value="" name="dtls_handshake_3aac" size="0"/>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_9">
+  <Block name="dtls_record_9">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_0e03"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_7667"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_ce9f"/>
+    <Blob valueType="hex" value="000000000007" name="dtls_record_sequence_number_4cf5" size="48"/>
+    <Number size="16" value="00c2" valueType="hex" endian="little" name="dtls_record_length_920f"/>
+    <Block name="dtls_handshake_70c5">
+      <Number size="8" value="04" valueType="hex" endian="little" name="dtls_handshake_type_604e"/>
+      <Blob valueType="hex" value="0000b6" name="dtls_handshake_length_e8af" size="24"/>
+      <Number size="16" value="0005" valueType="hex" endian="little" name="dtls_handshake_message_seq_c447"/>
+      <Blob valueType="hex" value="000000" name="dtls_handshake_fragment_offset_9497" size="24"/>
+      <Blob valueType="hex" value="0000b6" name="dtls_handshake_fragment_length_8818" size="24"/>
+      <Block name="TLS Session Ticket_7336">
+        <Number size="32" value="00001c20" valueType="hex" endian="little" name="dtls_handshake_session_ticket_lifetime_hint_4161"/>
+        <Number size="16" value="00b0" valueType="hex" endian="little" name="dtls_handshake_session_ticket_length_fa24"/>
+        <Blob valueType="hex" value="57b787b815d3d59c696da8847a24c9372d5c452ae30dcb92a23f1e62374ec0704d153b52c0a7ff7611f4337b2eb3c058ad9cbeb180f3b4a5a71c5835ab4ed9aa6503c08df995ef2101a0d59c34b20e05e4aad409b574bd808d66d79aded7853900b356708bce3764f34446d4b6e4f051a666e1a3d942e203f0b046b53e1f83d5822d4bc438ccc60835a36c14df93e6abd1675cea4b12347ce57e6ca44a794bb71c416d285d99465ed5eed25ff85c13fa" name="dtls_handshake_session_ticket_6763" size="1408"/>
+      </Block>
+    </Block>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_10">
+  <Block name="dtls_record_10">
+    <Number size="8" value="14" valueType="hex" endian="little" name="dtls_record_content_type_6fed"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_d7fb"/>
+    <Number size="16" value="0000" valueType="hex" endian="big" name="dtls_record_epoch_744b"/>
+    <Blob valueType="hex" value="000000000008" name="dtls_record_sequence_number_098b" size="48"/>
+    <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_record_length_4c80"/>
+    <Blob valueType="hex" value="" name="dtls_change_cipher_spec_94bf" size="0"/>
+  </Block>
+  <Block name="dtls_record_ad8d">
+    <Number size="8" value="16" valueType="hex" endian="little" name="dtls_record_content_type_ed17"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_5911"/>
+    <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_record_epoch_6da5"/>
+    <Blob valueType="hex" value="000000000000" name="dtls_record_sequence_number_dbd7" size="48"/>
+    <Number size="16" value="0030" valueType="hex" endian="little" name="dtls_record_length_0929"/>
+    <Blob valueType="hex" value="" name="dtls_handshake_6c2b" size="0"/>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_11">
+  <Block name="dtls_record_11">
+    <Number size="8" value="17" valueType="hex" endian="little" name="dtls_record_content_type_87de"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_62cc"/>
+    <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_record_epoch_8fc9"/>
+    <Blob valueType="hex" value="000000000001" name="dtls_record_sequence_number_e703" size="48"/>
+    <Number size="16" value="001e" valueType="hex" endian="little" name="dtls_record_length_a6d4"/>
+    <Blob valueType="hex" value="dc8795b845fb7ff768ff91a9c00afc49f8e6ae30023552cde6fc096d7432" name="dtls_app_data_868e" size="240"/>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_12">
+  <Block name="dtls_record_12">
+    <Number size="8" value="17" valueType="hex" endian="little" name="dtls_record_content_type_03cc"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_91e7"/>
+    <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_record_epoch_2987"/>
+    <Blob valueType="hex" value="000000000002" name="dtls_record_sequence_number_3bb8" size="48"/>
+    <Number size="16" value="001e" valueType="hex" endian="little" name="dtls_record_length_876c"/>
+    <Blob valueType="hex" value="dc8795b845fb7ff835b286044c7239cab3ae06c46bcc2e986a4d7ff4c829" name="dtls_app_data_df7e" size="240"/>
+  </Block>
+</DataModel>
+
+<DataModel name="dtls_record_13">
+  <Block name="dtls_record_13">
+    <Number size="8" value="17" valueType="hex" endian="little" name="dtls_record_content_type_1056"/>
+    <Number size="16" value="fefd" valueType="hex" endian="little" name="dtls_record_version_9118"/>
+    <Number size="16" value="0001" valueType="hex" endian="little" name="dtls_record_epoch_79e0"/>
+    <Blob valueType="hex" value="000000000003" name="dtls_record_sequence_number_a284" size="48"/>
+    <Number size="16" value="001e" valueType="hex" endian="little" name="dtls_record_length_ed49"/>
+    <Blob valueType="hex" value="dc8795b845fb7ff9249116ef12e6e6a0eb1a455e1185bce6b9d580d95a00" name="dtls_app_data_ef3f" size="240"/>
+  </Block>
+</DataModel>
+
+
+
+
+
+<StateModel name="dtls" initialState="test">
+    <State name="test">
+
+        <Action type="output">
+            <DataModel ref="dtls_record_1" />
+        </Action>
+        <Action type="output">
+            <DataModel ref="dtls_record_2" />
+        </Action>
+        <Action type="output">
+            <DataModel ref="dtls_record_3" />
+        </Action>
+
+        <Action type="output">
+            <DataModel ref="dtls_record_8" />
+        </Action>
+
+        <Action type="output">
+            <DataModel ref="dtls_record_11" />
+        </Action>
+
+        <Action type="output">
+            <DataModel ref="dtls_record_12" />
+        </Action>
+
+        <Action type="output">
+            <DataModel ref="dtls_record_13" />
+        </Action>
+
+    </State>
+
+</StateModel>
+
+
+
+<Agent name="LinAgent" >
+    <Monitor class="Process" name="dtls">
+            <Param name="Executable" value="/usr/local/openssl-3.3.1/bin/openssl" />
+            <Param name="Arguments" value=" s_server -dtls1_2 -cert /opt/openssl-3.3.1/demos/sslecho/cert.pem -key /opt/openssl-3.3.1/demos/sslecho/key.pem -accept 4444" />
+            <Param name="RestartOnEachTest" value="true" />
+            <Param name="Faultonearlyexit" value="False" />
+            <!-- <Param name="StartOnCall" value="hexdump"/> -->
+    </Monitor>
+</Agent> 
+
+<Test name="Default" replayEnabled="false">
+ <Agent ref="LinAgent" platform="linux"/>   
+        <StateModel ref="dtls"/>
+        <Publisher class="Udp" name="multicast">
+            <Param name="Host" value="127.0.0.1" />
+            <Param name="Port" value="4444" />
+        </Publisher>
+        <Logger class="File">
+                <Param name="Path" value="/root/protocolFuzz/openssl/peach/logs"/>
+        </Logger>
+</Test>
+
+</Peach>
+<!-- end -->
+
+
+    
