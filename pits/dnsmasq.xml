@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Peach xmlns="http://peachfuzzer.com/2012/Peach" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://peachfuzzer.com/2012/Peach ../peach.xsd">
+
+
+<DataModel name="p1">
+  <Number size="16" value="5ad9" valueType="hex" endian="little" name="dns_id_219a"/>
+  <Block name="dns_flags_8e8b">
+    <Blob valueType="hex" value="0100" name="dns_flags_response_a02a" size="16"/>
+  </Block>
+  <Number size="16" value="0001" valueType="hex" endian="little" name="dns_count_queries_865a"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_answers_684e"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_auth_rr_87f8"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_add_rr_d02f"/>
+  <Block name="Queries_7256">
+    <Block name="www_baidu_com">
+      <Blob valueType="hex" value="0377777705626169647503636f6d00" name="dns_qry_name_a6bf" size="120"/>
+      <Number size="16" value="0001" valueType="hex" endian="little" name="dns_qry_type_ae7b"/>
+      <Blob valueType="hex" value="0001" name="dns_qry_class_710e" size="16"/>
+    </Block>
+  </Block>
+</DataModel>
+<DataModel name="p2">
+  <Number size="16" value="5ada" valueType="hex" endian="little" name="dns_id_219b"/>
+  <Block name="dns_flags_8e8c">
+    <Blob valueType="hex" value="8100" name="dns_flags_response_a02b" size="16"/>
+  </Block>
+  <Number size="16" value="0001" valueType="hex" endian="little" name="dns_count_queries_865b"/>
+  <Number size="16" value="0001" valueType="hex" endian="big" name="dns_count_answers_684f"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_auth_rr_87f9"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_add_rr_d030"/>
+  <Block name="Queries_7257">
+    <Block name="www_google_com">
+      <Blob valueType="hex" value="0377777707676f6f676c6503636f6d00" name="dns_qry_name_a6c0" size="120"/>
+      <Number size="16" value="0001" valueType="hex" endian="little" name="dns_qry_type_ae7c"/>
+      <Blob valueType="hex" value="0001" name="dns_qry_class_710f" size="16"/>
+    </Block>
+  </Block>
+</DataModel>
+
+<!-- New DataModel p3 -->
+<DataModel name="p3">
+  <Number size="16" value="5adb" valueType="hex" endian="little" name="dns_id_219c"/>
+  <Block name="dns_flags_8e8d">
+    <Blob valueType="hex" value="8100" name="dns_flags_response_a02c" size="16"/>
+  </Block>
+  <Number size="16" value="0002" valueType="hex" endian="little" name="dns_count_queries_865c"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_answers_6850"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_auth_rr_87fa"/>
+  <Number size="16" value="0000" valueType="hex" endian="big" name="dns_count_add_rr_d031"/>
+  <Block name="Queries_7258">
+    <Block name="www_yahoo_com">
+      <Blob valueType="hex" value="037777770969616f6803636f6d00" name="dns_qry_name_a6d1" size="120"/>
+      <Number size="16" value="0001" valueType="hex" endian="little" name="dns_qry_type_ae7d"/>
+      <Blob valueType="hex" value="0001" name="dns_qry_class_7110" size="16"/>
+    </Block>
+    <Block name="www_facebook_com">
+      <Blob valueType="hex" value="03777777066661636b6f6f6c0c636f6d00" name="dns_qry_name_a6e2" size="120"/>
+      <Number size="16" value="0001" valueType="hex" endian="little" name="dns_qry_type_ae7e"/>
+      <Blob valueType="hex" value="0001" name="dns_qry_class_7111" size="16"/>
+    </Block>
+  </Block>
+</DataModel>
+
+<StateModel name="dns" initialState="test">
+    <State name="test">
+        <Action type="output">
+            <DataModel ref="p1" />
+            <DataModel ref="p2" />
+            <DataModel ref="p3" />
+        </Action>
+    </State>
+
+</StateModel>
+
+
+
+<Agent name="LinAgent" >
+    <Monitor class="Process" name="dns">
+            <Param name="Executable" value="/usr/local/sbin/dnsmasq" />
+            <Param name="Arguments" value=" -p 5353 -d -C /opt/dnsmasq-2.90/conf/dnsmasq.conf -8 /var/log/dnsmasq/dnsmasq.log" />
+            <Param name="RestartOnEachTest" value="true" />
+            <Param name="Faultonearlyexit" value="False" />
+            <!-- <Param name="StartOnCall" value="hexdump"/> -->
+    </Monitor>
+</Agent> 
+
+<Test name="Default" replayEnabled="false">
+        <Agent ref="LinAgent" platform="linux"/>
+        <StateModel ref="dns"/>
+        <Publisher class="Udp" name="multicast">
+            <Param name="Host" value="127.0.0.1" />
+            <Param name="Port" value="5353" />
+        </Publisher>
+        <Logger class="File">
+          <Param name="Path" value="/root/protocolFuzz/dns/peach/logs"/>
+        </Logger>
+</Test>
+
+</Peach>
+
+    
