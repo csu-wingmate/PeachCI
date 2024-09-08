@@ -2,7 +2,7 @@
 PROTOCOL=$1   #name of the protocol
 RUNS=$2       #number of runs
 SAVETO=$3     #path to folder keeping the results
-FUZZER=$4     #fuzzer name (e.g., peach) -- this name must match the name of the fuzzer folder inside the Docker container
+FUZZER=$4     #fuzzer name (e.g., peach) 
 TIMEOUT=$5    #time for fuzzing
 OPTIONS=$6    #all configured options for fuzzing
 DELETE=$7
