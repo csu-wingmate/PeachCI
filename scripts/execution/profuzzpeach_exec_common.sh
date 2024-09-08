@@ -1,61 +1,101 @@
 #!/bin/bash
-
-DOCIMAGE=$1   #name of the docker image
-PROTOCOL=$2   #name of the protocol
-RUNS=$3       #number of runs
-SAVETO=$4     #path to folder keeping the results
-FUZZER=$5     #fuzzer name (e.g., aflnet) -- this name must match the name of the fuzzer folder inside the Docker container
-TIMEOUT=$6    #time for fuzzing
+PROTOCOL=$1   #name of the protocol
+RUNS=$2       #number of runs
+SAVETO=$3     #path to folder keeping the results
+FUZZER=$4     #fuzzer name (e.g., peach) -- this name must match the name of the fuzzer folder inside the Docker container
+TIMEOUT=$5    #time for fuzzing
+OPTIONS=$6    #all configured options for fuzzing
 DELETE=$7
 
-WORKDIR="/root/experiments"
+WORKDIR="/root"
 
 #keep all container ids
-cids=()
+fids=() ## fuzzer container ids
+pids=() ## protocol container ids
+
+# 网络名称
+##NETWORK_NAME="my_network"
+
+# 检查网络是否存在
+##if ! docker network inspect $NETWORK_NAME &> /dev/null; then
+##    echo "Creating network: $NETWORK_NAME"
+##    docker network create --subnet=192.168.0.0/16 $NETWORK_NAME
+##else
+##    echo "Network $NETWORK_NAME already exists."
+##fi
 
 #create one container for each run
 for i in $(seq 1 ${RUNS}); do
 
   # 启动Docker容器
-  id=$(docker run --cpus=1 -itd ${DOCIMAGE} /bin/bash)
-  
+  fid=$(docker run --cpus=1 -itd ${FUZZER} /bin/bash)
+
+  pid=$(docker run --cpus=1 -itd -p 21 ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh")
+
+  # protocol的IP地址
+  EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
+
+  # 检查是否传入了IP地址
+  if [ -z "$EXTERNAL_IP" ]; then
+    echo "Usage: $0 <IP-ADDRESS>"
+    exit 1
+  fi
+  # XML文件路径
+  XML_FILE="$PFBENCH/pits/${PROTOCOL}_task.xml"
+
+  # 使用sed命令替换Host参数的值
+  sed -i "s|<Param name=\"Host\" value=\".*\"/>|<Param name=\"Host\" value=\"$EXTERNAL_IP\"/>|" $XML_FILE
+
   # 将本地文件复制到Docker容器的指定位置
-  docker cp $PFBENCH/subjects/${PROTOCOL}/${DOCIMAGE}/${DOCIMAGE}_task.xml ${id}:${WORKDIR}/tasks/${DOCIMAGE}_task.xml
-  
+  docker cp $PFBENCH/pits/${PROTOCOL}_task.xml ${fid}:${WORKDIR}/tasks/${PROTOCOL}_task.xml
+
   # 在容器内执行测试脚本
-  docker exec -itd ${id} /bin/bash -c "cd ${WORKDIR} && ./${FUZZER}_out.sh ${TIMEOUT} ${DOCIMAGE}_task.xml"
+  docker exec -itd ${fid} /bin/bash -c "timeout ${TIMEOUT} mono /root/${FUZZER}/bin/peach.exe  ${PROTOCOL}_task.xml &"
   
   # 存储容器ID
-  cids+=(${id::12}) # 只存储容器ID的前12个字符
+  fids+=(${fid::12}) # 只存储容器ID的前12个字符
 done
 
-dlist="" #docker list
-for id in ${cids[@]}; do
-  dlist+=" ${id}"
+flist="" #fuzzer docker list
+for fid in ${fids[@]}; do
+  flist+=" ${fid}"
 done
-
 #wait until all these dockers are stopped
 printf "\n${FUZZER^^}: Fuzzing in progress ..."
-printf "\n${FUZZER^^}: Waiting for the following containers to stop: ${dlist}"
-docker wait ${dlist} > /dev/null
-for id in ${cids[@]}; do
-  docker wait $id > /dev/null
+printf "\n${FUZZER^^}: Waiting for the following containers to stop: ${flist}"
+docker wait ${flist} > /dev/null
+for fid in ${fids[@]}; do
+  docker wait $fid > /dev/null
 done
 wait
+
+plist="" #protocol docker list
+for pid in ${pids[@]}; do
+  plist+=" ${pid}"
+done
+#wait until all these dockers are stopped
+printf "\n${PROTOCOL^^}: Waiting for the following containers to stop: ${plist}"
+docker wait ${plist} > /dev/null
+for pid in ${pids[@]}; do
+  docker wait $pid > /dev/null
+done
+wait
+
 
 #collect the fuzzing results from the containers
 printf "\n${FUZZER^^}: Collecting results and save them to${SAVETO}"
 index=1
-for id in ${cids[@]}; do
-  printf "\n${FUZZER^^}: Collecting results from container${id}"
+ttime=`date +%Y-%m-%d-%T`
+for pid in ${pids[@]}; do
+  printf "\n${FUZZER^^}: Collecting results from container${pid}"
   
   # Copy the 'branch' and 'logs' folders from the container to the local directory
-  docker cp ${id}:/root/experiments/branch ${SAVETO}/${FUZZER}_${index}_branch
-  docker cp ${id}:/root/experiments/logs ${SAVETO}/${FUZZER}_${index}_logs
-  
+  docker cp ${pid}:/root/experiments/branch${SAVETO}/${index}_branch_${ttime}
+  docker cp ${pid}:/root/experiments/logs${SAVETO}/${index}_logs_${ttime}
+
   if [ ! -z $DELETE ]; then
-    printf "\nDeleting ${id}"
-    docker rm ${id} # Remove container now that we don't need it
+    printf "\nDeleting ${pid}"
+    docker rm ${pid} # Remove container now that we don't need it
   fi
   index=$((index+1))
 done
