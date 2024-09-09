@@ -93,7 +93,7 @@
             <Param name="Port" value="5353" />
         </Publisher>
         <Logger class="File">
-          <Param name="Path" value="/root/protocolFuzz/dns/peach/logs"/>
+          <Param name="Path" value="/root/logs"/>
         </Logger>
 </Test>
 
