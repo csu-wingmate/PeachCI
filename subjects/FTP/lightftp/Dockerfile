@@ -45,40 +45,32 @@ RUN apt-get install -y \
     gnutls-dev libgnutls28-dev lcov
 
 # 克隆 pcguard-cov 仓库
-RUN git clone https://gitee.com/xz_chenwanli/pcguard-cov.git
+RUN git clone https://github.com/csu-wingmate/pcguard-cov.git
 
 # 切换到 pcguard-cov 目录并解压文件
 WORKDIR /root/pcguard-cov
 RUN unzip -o pcguard-cov.zip
-
 # 编译 pcguard-cov
-RUN make
+RUN cp collect.py /root/collect.py && \
+    make
 
 # 切换到 llvm_mode 目录并编译
 WORKDIR /root/pcguard-cov/llvm_mode
-COPY --chown=ubuntu:ubuntu ../../Makefile /root/pcguard-cov/llvm_mode/Makefile
 RUN AFL_TRACE_PC=1 make
 
 # 克隆 LightFTP 仓库
 WORKDIR /root
-
-COPY --chown=ubuntu:ubuntu ../../collect.py /root/collect.py
-
 RUN git clone http://github.com/hfiref0x/LightFTP.git LightFTP
 
 # 切换到 LightFTP/Source/Release 目录并使用 afl-clang-fast 编译
 WORKDIR /root/LightFTP/Source/Release
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
 
-
 WORKDIR /root
 COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 
 RUN mkdir /home/user/
 RUN touch /home/user/fftplog
-
-# 暴露端口（如果需要）
-EXPOSE 8021
 
 # 容器启动命令
 CMD ["bash"]
