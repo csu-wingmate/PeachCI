@@ -4,8 +4,7 @@ RUNS=$2       #number of runs
 SAVETO=$3     #path to folder keeping the results
 FUZZER=$4     #fuzzer name (e.g., peach) 
 TIMEOUT=$5    #time for fuzzing
-OPTIONS=$6    #all configured options for fuzzing
-DELETE=$7
+DELETE=$6
 
 WORKDIR="/root"
 
@@ -16,17 +15,12 @@ pids=() ## protocol container ids
 for i in $(seq 1 ${RUNS}); do
 
   # 启动Docker容器
-  fid=$(docker run --cpus=1 -itd ${FUZZER} /bin/bash)
-  pid=$(docker run --cpus=1 -itd ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh ${FUZZER}")
+  fid=$(docker run --cpus=1 -d -it ${FUZZER} /bin/bash)
+  pid=$(docker run --cpus=1 -d -it ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh ${FUZZER}")
 
   # protocol的IP地址
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
 
-  # 检查是否传入了IP地址
-  if [ -z "$EXTERNAL_IP" ]; then
-    echo "Usage: $0 <IP-ADDRESS>"
-    exit 1
-  fi
   # XML文件路径
   XML_FILE="$PFBENCH/pits/${PROTOCOL}.xml"
 
@@ -37,47 +31,39 @@ for i in $(seq 1 ${RUNS}); do
   docker cp $PFBENCH/pits/${PROTOCOL}.xml ${fid}:${WORKDIR}/tasks/${PROTOCOL}.xml
 
   # 在容器内执行测试脚本
-  docker exec -itd ${fid} /bin/bash -c "timeout ${TIMEOUT} mono ${WORKDIR}/${FUZZER}/bin/peach.exe ${OPTIONS} ${PROTOCOL}.xml &"
+  docker exec -d ${fid} /bin/bash -c "timeout ${TIMEOUT} mono ./${FUZZER}/bin/peach.exe ./tasks/${PROTOCOL}.xml"
   
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
   pids+=(${pid::12}) # 只存储容器ID的前12个字符
 done
 
-flist="" #fuzzer docker list
-for fid in ${fids[@]}; do
-  flist+=" ${fid}"
-done
-#wait until all these dockers are stopped
-printf "\n${FUZZER^^}: Fuzzing in progress ..."
-printf "\n${FUZZER^^}: Waiting for the following containers to stop: ${flist}"
-docker wait ${flist} > /dev/null
-for fid in ${fids[@]}; do
-  docker wait $fid > /dev/null
-done
-wait
+# 合并fuzzer和protocol容器的ID列表
+all_containers=("${fids[@]}" "${pids[@]}")
 
-plist="" #protocol docker list
-for pid in ${pids[@]}; do
-  plist+=" ${pid}"
-done
-#wait until all these dockers are stopped
-printf "\n${PROTOCOL^^}: Waiting for the following containers to stop: ${plist}"
-docker wait ${plist} > /dev/null
-for pid in ${pids[@]}; do
-  docker wait $pid > /dev/null
-done
+# 将所有容器ID转换为字符串，用于docker wait命令
+container_list=$(printf "%s " "${all_containers[@]}")
+
+# 等待所有容器停止
+printf "\nWaiting for all containers to stop: ${container_list}"
+docker wait ${container_list} > /dev/null
+
+# 可以省略以下循环，因为上面的docker wait已经等待所有容器
+# for container_id in "${all_containers[@]}"; do
+#   docker wait $container_id > /dev/null
+# done
+
+# 等待所有后台进程结束
 wait
 
 #collect the fuzzing results from the containers
-printf "\n${FUZZER^^}: Collecting results and save them to${SAVETO}"
+printf "\n${FUZZER^^}: Collecting results and save them to ${SAVETO}"
 index=1
-ttime=`date +%Y-%m-%d-%T`
 for fid in ${fids[@]}; do
-  printf "\n${FUZZER^^}: Collecting results from container${fid}"
+  printf "\n${FUZZER^^}: Collecting results from container ${fid}"
   
   # Copy the 'logs' folders from the container to the local directory
-  docker cp ${fid}:/root/logs${SAVETO}/${index}_logs_${ttime}
+  docker cp ${fid}:/root/logs ${SAVETO}/${FUZZER}_${index}_logs
 
   if [ ! -z $DELETE ]; then
     printf "\nDeleting ${pid}"
@@ -88,10 +74,10 @@ done
 
 index=1
 for pid in ${pids[@]}; do
-  printf "\n${FUZZER^^}: Collecting results from container${pid}"
+  printf "\n${FUZZER^^}: Collecting results from container ${pid}"
   
   # Copy the 'branch' folders from the container to the local directory
-  docker cp ${pid}:/root/branch${SAVETO}/${index}_branch_${ttime}
+  docker cp ${pid}:/root/branch ${SAVETO}/${FUZZER}_${index}_branch
 
   if [ ! -z $DELETE ]; then
     printf "\nDeleting ${pid}"
