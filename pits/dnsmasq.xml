@@ -78,7 +78,7 @@
 <Agent name="LinAgent" >
     <Monitor class="Process" name="dns">
             <Param name="Executable" value="/usr/local/sbin/dnsmasq" />
-            <Param name="Arguments" value=" -p 5353 -d -C /opt/dnsmasq-2.90/conf/dnsmasq.conf -8 /var/log/dnsmasq/dnsmasq.log" />
+            <Param name="Arguments" value=" -p 5353 -d -C /root/dns/conf/dnsmasq.conf -8 /var/log/dnsmasq/dnsmasq.log" />
             <Param name="RestartOnEachTest" value="true" />
             <Param name="Faultonearlyexit" value="False" />
             <!-- <Param name="StartOnCall" value="hexdump"/> -->
