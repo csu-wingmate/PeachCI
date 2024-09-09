@@ -1,5 +1,5 @@
 #!/bin/bash
-
+FUZZER=$1
 # 协议和项目名称
 protocol=ftp
 project=lightftp
@@ -7,7 +7,7 @@ port=21
 
 # 当前时间
 ttime=`date +%Y-%m-%d-%T`
-t="peach_ftp-${ttime}"
+t="${FUZZER}_ftp-${ttime}"
 
 # 创建临时文件路径
 cov_edge_path="/dev/shm/edge_${t}"
