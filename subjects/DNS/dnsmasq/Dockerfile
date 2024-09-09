@@ -62,5 +62,10 @@ RUN git clone git://thekelleys.org.uk/dnsmasq.git dns
 RUN cd dns && CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
 RUN cd dns && CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make install
 
+WORKDIR /var/log/
+RUN mkdir /var/log/dnsmasq && \
+    touch /var/log/dnsmasq/dnsmasq.log
+
+WORKDIR /root
 # 容器启动命令
 CMD ["bash"]
