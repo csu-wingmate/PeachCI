@@ -139,7 +139,7 @@
  <Agent name="LinAgent">
     <Monitor class="Process">
 	 <Param name="Executable" value="/usr/local/apache2/bin/apachectl"/>
-	 <Param name="Arguments" value="-f /usr/local/apache2/conf/httpd_copy.conf -E /usr/local/apache2/logs/error_log1" />
+	 <Param name="Arguments" value="-f /usr/local/apache2/conf/httpd.conf" />
 	   <Param name="RestartOnEachTest" value="true" />
             <Param name="Faultonearlyexit" value="False" />
     </Monitor>
@@ -154,11 +154,11 @@
     <StateModel ref="HttpStateModel"/>
     <Publisher class="tcp.Tcp">
       <Param name="Host" value="localhost" />
-      <Param name="Port" value="81" />
+      <Param name="Port" value="80" />
     </Publisher>
 
     <Logger class="File">
-      <Param name="Path" value="/root/protocolFuzz/http/peach/logs"/>
+      <Param name="Path" value="/root/logs"/>
     </Logger>
   </Test>
 </Peach>
