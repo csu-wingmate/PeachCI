@@ -51,8 +51,8 @@ RUN git clone https://github.com/csu-wingmate/pcguard-cov.git
 WORKDIR /root/pcguard-cov
 RUN unzip -o pcguard-cov.zip
 # 编译 pcguard-cov
-RUN cp collect.py /root/collect.py && \
-    make
+RUN make
+RUN cp collect.py /root/collect.py
 
 # 切换到 llvm_mode 目录并编译
 WORKDIR /root/pcguard-cov/llvm_mode
