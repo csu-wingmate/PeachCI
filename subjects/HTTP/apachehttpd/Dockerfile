@@ -68,12 +68,10 @@ RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu
 
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 /root/httpd/httpd-2.4.61/configure --prefix=/usr/local
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make || true
-COPY --chown=ubuntu:ubuntu test_char.h /root/httpd1/httpd-2.4.61/server/test_char.h
+COPY --chown=ubuntu:ubuntu test_char.h /root/httpd/httpd-2.4.61/server/test_char.h
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make install
 
 WORKDIR /root
-# 暴露端口（如果需要）
-EXPOSE 8080
 
 # 容器启动命令
 CMD ["bash"]
