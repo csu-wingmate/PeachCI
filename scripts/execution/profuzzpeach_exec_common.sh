@@ -17,7 +17,7 @@ for i in $(seq 1 ${RUNS}); do
 
   # 启动Docker容器
   fid=$(docker run --cpus=1 -itd ${FUZZER} /bin/bash)
-  pid=$(docker run --cpus=1 -itd ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh")
+  pid=$(docker run --cpus=1 -itd ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh ${FUZZER}")
 
   # protocol的IP地址
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
