@@ -63,12 +63,15 @@ RUN /bin/bash /etc/profile
 # 切换到源代码目录
 WORKDIR /root/
 RUN mkdir tasks
-COPY --chown=ubuntu:ubuntu Peach /root/peach/
+COPY --chown=ubuntu:ubuntu Peach /root/Peach/
+
+# 设置工作目录
+WORKDIR /root/Peach/bin/
+# 设置环境变量 FUZZERPATH 为当前工作目录的路径
+ENV FUZZERPATH $PWD
 
 
 
-# 暴露端口（如果需要）
-EXPOSE 8080
 
 # 容器启动命令
 CMD ["bash"]
