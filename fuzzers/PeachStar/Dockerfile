@@ -54,10 +54,11 @@ RUN clang control.c -fPIC -shared -o libpeachControl.so && \
     cd /dev/shm && \
     dd if=/dev/zero bs=10M count=1 of=$name-of-shared-memory && \
     export SHM_ENV_VAR=/dev/shm/$name-of-shared-memory 
-
-  
-# 暴露端口（如果需要）
-EXPOSE 8080
+    
+# 设置工作目录
+WORKDIR /root/PeachStar/peach-3.0.202-source/output/linux_x86_64_release/bin
+# 设置环境变量 FUZZERPATH 为当前工作目录的路径
+ENV FUZZERPATH $PWD
 
 # 容器启动命令
 CMD ["bash"]
