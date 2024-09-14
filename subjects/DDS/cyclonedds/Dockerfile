@@ -38,12 +38,18 @@ WORKDIR /root/pcguard-cov/llvm_mode
 RUN AFL_TRACE_PC=1 make
 
 WORKDIR /root
-RUN git clone https://github.com/eclipse-cyclonedds/cyclonedds.git && \
-    cd cyclonedds/ && \
-    mkdir build && \
-    cd build && \ 
-    cmake -DBUILD_EXAMPLES=ON -DCMAKE_C_COMPILER=/root/pcguard-cov/afl-clang-fast -DCMAKE_CXX_COMPILER=/root/pcguard-cov/afl-clang-fast++ -DCMAKE_C_FLAGS="-Wall -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard " -DCMAKE_CXX_FLAGS="-Wall -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard " && \
-    cmake --build .  --parallel
+RUN git clone https://github.com/eclipse-cyclonedds/cyclonedds.git
+WORKDIR /root/cyclonedds
+RUN mkdir build
+WORKDIR /root/cyclonedds/build
+RUN cmake -DBUILD_EXAMPLES=ON \
+    -DCMAKE_C_COMPILER=/root/pcguard-cov/afl-clang-fast \
+    -DCMAKE_CXX_COMPILER=/root/pcguard-cov/afl-clang-fast++ \
+    -DCMAKE_C_FLAGS="-Wall -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard " \
+    -DCMAKE_CXX_FLAGS="-Wall -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard " \
+     ..
+RUN cmake --build .  --parallel
+
 
 WORKDIR /root
 COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
