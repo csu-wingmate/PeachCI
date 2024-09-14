@@ -5,7 +5,7 @@ FROM ubuntu:20.04
 # 设置非交互式前端，防止apt-get安装过程中出现交互式提示
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 更新包列表，安装所需软件包，配置时区
+# 更新包列表，安装所需软件包
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
