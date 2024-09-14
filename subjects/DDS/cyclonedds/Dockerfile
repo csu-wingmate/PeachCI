@@ -15,10 +15,6 @@ RUN apt-get update && \
     libglib2.0-dev libcairo2-dev \
     autoconf \
     llvm llvm-dev clang 
-    
-# 设置时区环境变量
-ENV TZ=Asia/Shanghai
-
 
 # 设置工作目录
 WORKDIR /root/
@@ -43,8 +39,11 @@ RUN AFL_TRACE_PC=1 make
 
 WORKDIR /root
 RUN git clone https://github.com/eclipse-cyclonedds/cyclonedds.git && \
-    cd cyclonedds/
-RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
+    cd cyclonedds/ && \
+    mkdir build && \
+    cd build && \ 
+    cmake -DBUILD_EXAMPLES=ON -DCMAKE_C_COMPILER=/root/pcguard-cov/afl-clang-fast -DCMAKE_CXX_COMPILER=/root/pcguard-cov/afl-clang-fast++ -DCMAKE_C_FLAGS="-Wall -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard " -DCMAKE_CXX_FLAGS="-Wall -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard " && \
+    cmake --build .  --parallel
 
 WORKDIR /root
 COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
