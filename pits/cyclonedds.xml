@@ -1158,7 +1158,7 @@
 	</Strategy>
 
 	<Logger class="File">
-		<Param name="Path" value="/root/log" />
+		<Param name="Path" value="/root/logs" />
 	</Logger>
 </Test>
 
