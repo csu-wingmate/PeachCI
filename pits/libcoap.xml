@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Peach xmlns="http://peachfuzzer.com/2012/Peach" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://peachfuzzer.com/2012/Peach ../peach.xsd">
+
+<DataModel name="Coap_GET" mutable="true">
+    <Block name="head" mutable="true">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="true">
+            <Relation type="size" of="token"/>
+        </Number>
+        <Number name="code" size="8" value="01" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="da 27" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+    <Blob   name="token" value="01" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Number name="opt_delta" size="4" value="3" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+            <!-- value="3" -->
+            <Relation type="size" of="opt_payload" mutable="true"/>
+        </Number>
+        <Blob   name="opt_payload" value="31 32 37 2e 30 2e 30 31" valueType="hex" mutable="true" />
+    </Block>
+
+    <Block name="payload" mutable="true">
+    </Block>
+</DataModel>
+
+<DataModel name="Coap_GET_Time" mutable="true">
+    <Block name="head" mutable="true">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="true">
+        <!-- value="01" -->
+            <Relation type="size" of="token"/>
+        </Number>
+
+        <Number name="code" size="8" value="01" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="da 27" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+
+    <Blob   name="token" value="01" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Number name="opt_delta" size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+            <!-- value="3" -->
+            <Relation type="size" of="opt_payload" mutable="true"/>
+        </Number>
+        <Blob   name="opt_payload" value="74 69 6d 65" valueType="hex" mutable="true" />
+    </Block>
+
+    <Block name="payload" mutable="true">
+
+    </Block>
+</DataModel>
+
+
+<DataModel name="Coap_GET_APP_Block" mutable="false">
+    <Block name="head" mutable="false">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="token"/>
+        </Number>
+        <Number name="code" size="8" value="01" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="a0 27" valueType="hex" signed="false" endian="network" mutable="false" />
+    </Block>
+    <Blob   name="token" value="39 01 d2 32" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Block name="option1" mutable="true">
+            <Number name="opt_delta" size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+            <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+                <!-- value="3" -->
+                <Relation type="size" of="url" mutable="false"/>
+            </Number>
+            <Number name="opt_length_extended" size="8" value="0" valueType="hex" signed="false"  endian="network" mutable="true" />
+            <Blob   name="url" value="61 70 70 2d 62 6c 6f 63 6b 77 69 73 65" valueType="hex" mutable="true" />
+        </Block>
+        <Block name="option2" mutable="true">
+            <Number name="opt_delta" size="4" value="c" valueType="hex" signed="false"  endian="network" mutable="true" />
+            <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+                <!-- value="3" -->
+                <Relation type="size" of="opt_payload" mutable="false"/>
+            </Number>
+            <Blob   name="opt_payload" value="00 00 10" valueType="hex" mutable="true" />
+        </Block>
+    </Block>
+
+    <Block name="payload" mutable="false">
+    </Block>
+</DataModel>
+
+<DataModel name="Coap_PUT_Block" mutable="false">
+    <Block name="head" mutable="false">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="false">
+        <!-- value="01" -->
+            <Relation type="size" of="token"/>
+        </Number>
+
+        <Number name="code" size="8" value="03" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="msg_id" size="16" value="4b 27" valueType="hex" signed="false" endian="network" mutable="false" />
+    </Block>
+
+    <Blob   name="token" value="39 01 d2 32" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Block name="option1" mutable="true">
+            <Number name="opt_delta"  size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+            <Number name="opt_length" size="4"           valueType="hex" signed="false"  endian="network" mutable="true">
+                <!-- value="3" -->
+                <Relation type="size" of="url" mutable="false"/>
+            </Number>
+            <Number name="opt_length_extended" size="8" value="0" valueType="hex" signed="false"  endian="network" mutable="true" />
+            <Blob   name="url" value="61 70 70 2d 62 6c 6f 63 6b 77 69 73 65" valueType="hex" mutable="true" />
+        </Block>
+        <Block name="option2" mutable="false">
+            <Number name="opt_delta"  size="4" value="d" valueType="hex" signed="false"  endian="network" mutable="true" />
+            <Number name="opt_length" size="4"           valueType="hex" signed="false"  endian="network" mutable="true">
+                <!-- value="3" -->
+                <Relation type="size" of="opt_payload" mutable="false"/>
+            </Number>
+            <Blob   name="opt_payload" value="00 00 08" valueType="hex" mutable="true" />
+        </Block>
+    </Block>
+
+    <Number name="endofopt" size="8" value="ff" valueType="hex" signed="false"  endian="network" mutable="false" />
+
+    <Blob name="payload" value="30 74 65 73 74 01 02 03 01 02 03 30 74 65 73 74 " valueType="hex" mutable="false" />
+</DataModel>
+
+
+<DataModel name="Coap_POST" mutable="true">
+    <Block name="head" mutable="true">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="true">
+        <!-- value="01" -->
+            <Relation type="size" of="token"/>
+        </Number>
+
+        <Number name="code" size="8" value="02" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="b5 d0" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+
+    <Blob   name="token" value="02" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Number name="opt_delta" size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+            <!-- value="3" -->
+            <Relation type="size" of="opt_payload" mutable="true"/>
+        </Number>
+        <Blob   name="opt_payload" value="74 65 73 74" valueType="hex" mutable="true" />
+    </Block>
+
+    <Number name="endofopt" size="8" value="ff" valueType="hex" signed="false"  endian="network" mutable="true" />
+
+    <Blob name="payload" value="74 65 73 74 2d 70 6f 73 74" valueType="hex" mutable="true" />
+    <!-- test-post -->
+</DataModel>
+
+<DataModel name="Coap_PUT" mutable="true">
+    <Block name="head" mutable="true">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="true">
+        <!-- value="01" -->
+            <Relation type="size" of="token"/>
+        </Number>
+
+        <Number name="code" size="8" value="03" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="4b 27" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+
+    <Blob   name="token" value="03" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Number name="opt_delta" size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+            <!-- value="3" -->
+            <Relation type="size" of="opt_payload" mutable="true"/>
+        </Number>
+        <Blob   name="opt_payload" value="74 65 73 74" valueType="hex" mutable="true" />
+    </Block>
+
+    <Number name="endofopt" size="8" value="ff" valueType="hex" signed="false"  endian="network" mutable="true" />
+
+    <Blob name="payload" value="74 65 73 74 2d 74 65 78 74" valueType="hex" mutable="true" />
+</DataModel>
+
+<DataModel name="Coap_DEL" mutable="true">
+    <Block name="head" mutable="true">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="true">
+        <!-- value="01" -->
+            <Relation type="size" of="token"/>
+        </Number>
+
+        <Number name="code" size="8" value="04" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="07 27" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+
+    <Blob   name="token" value="04" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Number name="opt_delta" size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+            <!-- value="3" -->
+            <Relation type="size" of="opt_payload" mutable="true"/>
+        </Number>
+        <Blob   name="opt_payload" value="74 65 73 74" valueType="hex" mutable="true" />
+    </Block>
+
+    <Number name="endofopt" size="8" value="ff" valueType="hex" signed="false"  endian="network" mutable="true" />
+
+    <Blob name="payload" value="" valueType="hex" mutable="true" />
+</DataModel>
+
+<DataModel name="Coap_FETCH" mutable="true">
+    <Block name="head" mutable="true">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="true">
+        <!-- value="01" -->
+            <Relation type="size" of="token"/>
+        </Number>
+
+        <Number name="code" size="8" value="05" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="a4 27" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+
+    <Blob   name="token" value="05" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Number name="opt_delta" size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+            <!-- value="3" -->
+            <Relation type="size" of="opt_payload" mutable="true"/>
+        </Number>
+        <Blob   name="opt_payload" value="74 65 73 74" valueType="hex" mutable="true" />
+    </Block>
+
+</DataModel>
+
+<DataModel name="Coap_PATCH" mutable="true">
+    <Block name="head" mutable="true">
+        <Number name="version" size="2" value="01" valueType="hex" signed="false" endian="network" mutable="false" />
+        <Number name="msg_type" size="2" value="00" valueType="hex" signed="false" endian="network" mutable="true" />
+        <Number name="token_length" size="4" valueType="hex" signed="false" endian="network" mutable="true">
+        <!-- value="01" -->
+            <Relation type="size" of="token"/>
+        </Number>
+
+        <Number name="code" size="8" value="06" valueType="hex" signed="false"  endian="network" mutable="false" />
+        <Number name="msg_id" size="16" value="9b 27" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+
+    <Blob   name="token" value="06" valueType="hex" mutable="true" />
+    
+    <Block name="options" mutable="true">
+        <Number name="opt_delta" size="4" value="b" valueType="hex" signed="false"  endian="network" mutable="true" />
+        <Number name="opt_length" size="4"  valueType="hex" signed="false"  endian="network" mutable="true">
+            <!-- value="3" -->
+            <Relation type="size" of="opt_payload" mutable="true"/>
+        </Number>
+        <Blob   name="opt_payload" value="74 65 73 74" valueType="hex" mutable="true" />
+    </Block>
+
+
+    <Number name="endofopt" size="8" value="ff" valueType="hex" signed="false"  endian="network" mutable="true" />
+
+    <Blob name="payload" value="70 61 74 63 68" valueType="hex" mutable="true" />
+</DataModel>
+
+<StateModel name="coapStateModel" initialState="test">
+	<State name="test">
+
+		<Action name="put" type="output" publisher="client">
+			<DataModel ref="coap:Coap_PUT"/>
+		</Action>
+
+		<Action name="get1" type="output" publisher="client">
+			<DataModel ref="coap:Coap_GET"/>
+		</Action>
+
+		<Action name="post" type="output" publisher="client">
+			<DataModel ref="coap:Coap_POST"/>
+		</Action>
+
+		<Action name="get2" type="output" publisher="client">
+			<DataModel ref="coap:Coap_GET"/>
+		</Action>
+	</State>
+</StateModel>
+
+
+<Agent name="LinAgent" >
+    <Monitor class="Process">
+        <Param name="Executable" value="/root/libcoap/examples/coap-server" />
+        <Param name="Arguments" value=" -A 127.0.0.1 -p 5577 -e -d 100 -v 9" />
+        <Param name="RestartOnEachTest" value="false" />
+        <Param name="Faultonearlyexit" value="true" />
+    </Monitor>
+</Agent> 
+
+
+<Test name="Default" replayEnabled="false">
+	<!-- <Param name="replayEnabled" value="false" /> -->
+	<Agent ref="LinAgent" platform="linux"/> 
+
+	<StateModel ref="coapStateModel"/>
+	
+	<Publisher class="Udp" name="client">
+		<Param name="Host" value="127.0.0.1" />
+		<Param name="Port" value="5577" />
+	</Publisher>
+
+	<Strategy class="Random">
+		<Param name="MaxFieldsToMutate" value="6"/>
+	</Strategy>
+
+	<Logger class="File">
+		<Param name="Path" value="LogsTask" />
+	</Logger>
+</Test>
+
+</Peach>
+<!-- end -->
