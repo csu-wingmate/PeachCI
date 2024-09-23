@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Peach xmlns="http://peachfuzzer.com/2012/Peach" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://peachfuzzer.com/2012/Peach ../peach.xsd">
+
+
+<DataModel name="Connect_Simple" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="1"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" value="16" signed="false" endian="network" mutable="true"/>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="name_length" size="16" value="4" signed="false" endian="network" mutable="true" />
+        <Number name="protocol_name" size="32" value="4d 51 54 54" valueType="hex" signed="false" endian="network" mutable="false" />
+
+        <Number name="version" size="8" value="4" signed="false" endian="network" mutable="true" />
+
+        <Flags name="connect_flags" size="8" mutable="true">
+            <Flag name="username"       position="7" size="1" value="0" valueType="hex" mutable="true"/>
+            <Flag name="password"       position="6" size="1" value="0" valueType="hex" mutable="true"/>
+            <Flag name="will_retain"    position="5" size="1" value="0" valueType="hex" mutable="true"/>
+            <Flag name="QoS_level"      position="3" size="2" value="0" valueType="hex" mutable="true"/>
+            <Flag name="will_flag"      position="2" size="1" value="0" valueType="hex" mutable="true"/>
+            <Flag name="clean_session"  position="1" size="1" value="0" valueType="hex" mutable="true"/>
+            <Flag name="reserved"       position="0" size="1" value="1" valueType="hex" mutable="true"/>
+        </Flags>
+
+        <Number name="keep_alive" size="16" value="60" signed="false" endian="network" mutable="true" />
+        
+        <Number name="client_id_length" size="16" value="4" signed="false" endian="network" mutable="true" />
+        <Number name="client_id" size="32" value="33 64 32 34" valueType="hex" signed="false" endian="network" mutable="true" />
+
+    </Block>
+</DataModel>
+
+<DataModel name="Connect" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="1"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true">
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="name_length" size="16" value="4" signed="false" endian="network" mutable="false" >
+            <Relation type="size" of="protocol_name"/>
+        </Number>
+        <Number name="protocol_name" size="32" value="4d 51 54 54" valueType="hex" signed="false" endian="network" mutable="false" />
+
+        <Number name="version" size="8" value="4" signed="false" endian="network" mutable="false" />
+        <Flags name="connect_flags" size="8" mutable="true">
+            <Flag name="username"       position="7" size="1" value="0" valueType="hex" mutable="true"/>
+            <Flag name="password"       position="6" size="1" value="0" valueType="hex" mutable="true"/>
+            <Flag name="will_retain"    position="5" size="1" value="1" valueType="hex" mutable="true"/>
+            <Flag name="QoS_level"      position="3" size="2" value="0" valueType="hex" mutable="true"/>
+            <Flag name="will_flag"      position="2" size="1" value="1" valueType="hex" mutable="true"/>
+            <Flag name="clean_session"  position="1" size="1" value="1" valueType="hex" mutable="true"/>
+            <Flag name="reserved"       position="0" size="1" value="0" valueType="hex" mutable="true"/>
+        </Flags>
+
+        <Number name="keep_alive" size="16" value="60" signed="false" endian="network" mutable="true" />
+
+        <Number name="client_id_length" size="16" value="4" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="client_id"/>
+        </Number>
+        <Number name="client_id" size="32" value="33 64 32 34" valueType="hex" signed="false" endian="network" mutable="true" />
+
+        <Number name="will_topic_length" size="16" value="9" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="will_topic"/>
+        </Number>
+        <Blob name="will_topic" size="32" value="74 65 73 74 2f 77 69 6c 6c" valueType="hex" endian="network" mutable="true" />
+
+        <Number name="will_message_length" size="16" value="4" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="will_message"/>
+        </Number>
+        <Number name="will_message" size="32" value="68 65 6c 6c" valueType="hex" signed="false" endian="network" mutable="false" />
+
+    </Block>
+</DataModel>
+
+<DataModel name="Connect_Ack" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="2"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true">
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="ack_flags" size="8" value="0" signed="false" endian="network" mutable="true" />
+
+        <Number name="return_code" size="8" value="0" signed="false" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="3"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="true" />
+        <Number name="QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="true" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" value="14" signed="false" endian="network" mutable="true"/> 
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="topic_length" size="16" value="8" signed="false" endian="network" mutable="true" />
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="true" />
+
+        <Blob name="message" size="32" value="68 65 6c 6c" valueType="hex" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_QoS1" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="3"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="true" />
+        <Number name="QoS_level"    size="2" value="1"  signed="false" endian="network" mutable="true" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="topic_length" size="16" signed="false" endian="network" mutable="true" >
+            <Relation type="size" of="topic"/>
+        </Number>
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="true" />
+
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="true" />
+        
+        <Blob name="message" size="32" value="68 65 6c 6c" valueType="hex" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_QoS2" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="3"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="true" />
+        <Number name="QoS_level"    size="2" value="2"  signed="false" endian="network" mutable="true" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="topic_length" size="16" signed="false" endian="network" mutable="true" >
+            <Relation type="size" of="topic"/>
+        </Number>
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="true" />
+        
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="true" />
+
+        <Blob name="message" size="32" value="68 65 6c 6c" valueType="hex" signed="false" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Ack" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="4"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Received" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="5"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Release" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="6"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="2"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Complete" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="7"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Subscribe" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="8"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="true" />
+        <Number name="QoS_level"    size="2" value="1"  signed="false" endian="network" mutable="true" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" value="13" signed="false" endian="network" mutable="true">
+            <!-- <Relation type="size" of="remaining"/> -->
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="37877" signed="false" endian="network" mutable="true" />
+        <Block name="topics" > <!--   minOccurs="1"   -->
+            <Number name="topic_length" size="16" value="8" signed="false" endian="network" mutable="true" >
+                <!-- <Relation type="size" of="topic"/> -->
+            </Number>
+            <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="true" />
+
+            <Number name="reserved"     size="6" value="0"  signed="false" endian="network" mutable="true" />
+
+            <Number name="QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="true" />
+        </Block>
+    </Block>
+</DataModel>
+
+<DataModel name="Subscribe_Ack" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="9"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true">
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="37877" signed="false" endian="network" mutable="true" />
+
+        <Block name="granted_QoS_levels">
+            <Number name="reserved"     size="6" value="0"  signed="false" endian="network" mutable="true" />
+            <Number name="granted_QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="true" />
+        </Block>
+    </Block>
+</DataModel>
+
+<DataModel name="Unsubscribe" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="10"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="2"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" value="12" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="37878" signed="false" endian="network" mutable="true" />
+
+        <Number name="topic_length" size="16" value="8" signed="false" endian="network" mutable="true" >
+            <Relation type="size" of="topic"/>
+        </Number>
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Unsubscribe_Ack" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="11"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="true"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="true">
+        <Number name="message_id" size="16" value="37878" signed="false" endian="network" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Ping_Request" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="12"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" value="0" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Ping_Response" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="13"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" value="0" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Disconnect" mutable="true">
+    <!-- head -->
+    <Block name="head" mutable="true">
+        <Number name="message_type" size="4" value="14"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="true" />
+        <Number name="QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="true" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="true" />
+
+        <Number name="remaining_length" size="8" value="0" mutable="true" />
+    </Block>
+</DataModel>
+
+<DataModel name="Connect_Simple" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="1"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" value="16" signed="false" endian="network" mutable="false"/>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="name_length" size="16" value="4" signed="false" endian="network" mutable="false" />
+        <Number name="protocol_name" size="32" value="4d 51 54 54" valueType="hex" signed="false" endian="network" mutable="false" />
+
+        <Number name="version" size="8" value="4" signed="false" endian="network" mutable="false" />
+
+        <Flags name="connect_flags" size="8" mutable="false">
+            <Flag name="username"       position="7" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="password"       position="6" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="will_retain"    position="5" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="QoS_level"      position="3" size="2" value="0" valueType="hex" mutable="false"/>
+            <Flag name="will_flag"      position="2" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="clean_session"  position="1" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="reserved"       position="0" size="1" value="1" valueType="hex" mutable="false"/>
+        </Flags>
+
+        <Number name="keep_alive" size="16" value="60" signed="false" endian="network" mutable="false" />
+        
+        <Number name="client_id_length" size="16" value="4" signed="false" endian="network" mutable="false" />
+        <Number name="client_id" size="32" value="33 64 32 34" valueType="hex" signed="false" endian="network" mutable="false" />
+
+    </Block>
+</DataModel>
+
+<DataModel name="Connect" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="1"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="name_length" size="16" value="4" signed="false" endian="network" mutable="false" >
+            <!-- <Relation type="size" of="protocol_name"/> -->
+        </Number>
+        <Number name="protocol_name" size="32" value="4d 51 54 54" valueType="hex" signed="false" endian="network" mutable="false" />
+
+        <Number name="version" size="8" value="4" signed="false" endian="network" mutable="false" />
+        <Flags name="connect_flags" size="8" mutable="false">
+            <Flag name="username"       position="7" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="password"       position="6" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="will_retain"    position="5" size="1" value="1" valueType="hex" mutable="false"/>
+            <Flag name="QoS_level"      position="3" size="2" value="0" valueType="hex" mutable="false"/>
+            <Flag name="will_flag"      position="2" size="1" value="1" valueType="hex" mutable="false"/>
+            <Flag name="clean_session"  position="1" size="1" value="1" valueType="hex" mutable="false"/>
+            <Flag name="reserved"       position="0" size="1" value="0" valueType="hex" mutable="false"/>
+        </Flags>
+
+        <Number name="keep_alive" size="16" value="60" signed="false" endian="network" mutable="false" />
+
+        <Number name="client_id_length" size="16" value="4" signed="false" endian="network" mutable="false">
+            <!-- <Relation type="size" of="client_id"/> -->
+        </Number>
+        <Number name="client_id" size="32" value="33 64 32 34" valueType="hex" signed="false" endian="network" mutable="false" />
+
+        <Number name="will_topic_length" size="16" value="9" signed="false" endian="network" mutable="false">
+            <!-- <Relation type="size" of="will_topic"/> -->
+        </Number>
+        <Blob name="will_topic" size="32" value="74 65 73 74 2f 77 69 6c 6c" valueType="hex" endian="network" mutable="false" />
+
+        <Number name="will_message_length" size="16" value="4" signed="false" endian="network" mutable="false">
+            <!-- <Relation type="size" of="will_message"/> -->
+        </Number>
+        <Number name="will_message" size="32" value="68 65 6c 6c" valueType="hex" signed="false" endian="network" mutable="false" />
+
+    </Block>
+</DataModel>
+
+<DataModel name="Connect_Ack" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="1"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="name_length" size="16" signed="false" endian="network" mutable="false" >
+            <Relation type="size" of="protocol_name"/>
+        </Number>
+        <Number name="protocol_name" size="32" value="4d 51 54 54" valueType="hex" signed="false" endian="network" mutable="false" />
+
+
+        <Number name="version" size="8" value="4" signed="false" endian="network" mutable="false" />
+        <Flags name="connect_flags" size="8" mutable="false">
+            <Flag name="username"       position="0" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="password"       position="1" size="1" value="0" valueType="hex" mutable="false"/>
+            <Flag name="will_retain"    position="2" size="1" value="1" valueType="hex" mutable="false"/>
+            <Flag name="QoS_level"      position="3" size="2" value="0" valueType="hex" mutable="false"/>
+            <Flag name="will_flag"      position="5" size="1" value="1" valueType="hex" mutable="false"/>
+            <Flag name="clean_session"  position="6" size="1" value="1" valueType="hex" mutable="false"/>
+            <Flag name="reserved"       position="7" size="1" value="0" valueType="hex" mutable="false"/>
+        </Flags>
+
+        <Number name="keep_alive" size="16" value="60" signed="false" endian="network" mutable="false" />
+
+        <Number name="client_id_length" size="16" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="client_id"/>
+        </Number>
+        <Number name="client_id" size="32" value="33 64 32 34" valueType="hex" signed="false" endian="network" mutable="false" />
+
+        <Number name="will_topic_length" size="16" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="will_topic"/>
+        </Number>
+        <Blob name="will_topic" size="32" value="74 65 73 74" valueType="hex" endian="network" mutable="false" />
+
+        <Number name="will_message_length" size="16" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="will_message"/>
+        </Number>
+        <Number name="will_message" size="32" value="68 65 6c 6c" valueType="hex" signed="false" endian="network" mutable="false" />
+
+    </Block>
+</DataModel>
+
+<DataModel name="Publish" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="3"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="false" />
+        <Number name="QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="false" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" value="14" signed="false" endian="network" mutable="false"/> 
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="topic_length" size="16" value="8" signed="false" endian="network" mutable="false" />
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="false" />
+
+        <Blob name="message" size="32" value="68 65 6c 6c" valueType="hex" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_QoS1" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="3"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="false" />
+        <Number name="QoS_level"    size="2" value="1"  signed="false" endian="network" mutable="false" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="topic_length" size="16" signed="false" endian="network" mutable="false" >
+            <Relation type="size" of="topic"/>
+        </Number>
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="false" />
+
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="false" />
+        
+        <Blob name="message" size="32" value="68 65 6c 6c" valueType="hex" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_QoS2" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="3"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="false" />
+        <Number name="QoS_level"    size="2" value="2"  signed="false" endian="network" mutable="false" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="topic_length" size="16" signed="false" endian="network" mutable="false" >
+            <Relation type="size" of="topic"/>
+        </Number>
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="false" />
+        
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="false" />
+
+        <Blob name="message" size="32" value="68 65 6c 6c" valueType="hex" signed="false" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Ack" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="4"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Received" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="5"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Release" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="6"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="2"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Publish_Complete" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="7"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="10001" signed="false" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Subscribe" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="8"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="false" />
+        <Number name="QoS_level"    size="2" value="1"  signed="false" endian="network" mutable="false" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" value="13" signed="false" endian="network" mutable="false">
+            <!-- <Relation type="size" of="remaining"/> -->
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="37877" signed="false" endian="network" mutable="false" />
+        <Block name="topics" > <!--   minOccurs="1"   -->
+            <Number name="topic_length" size="16" value="8" signed="false" endian="network" mutable="false" >
+                <!-- <Relation type="size" of="topic"/> -->
+            </Number>
+            <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="false" />
+
+            <Number name="reserved"     size="6" value="0"  signed="false" endian="network" mutable="false" />
+
+            <Number name="QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="false" />
+        </Block>
+    </Block>
+</DataModel>
+
+<DataModel name="Subscribe_Ack" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="9"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false">
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="37877" signed="false" endian="network" mutable="false" />
+
+        <Block name="granted_QoS_levels">
+            <Number name="reserved"     size="6" value="0"  signed="false" endian="network" mutable="false" />
+            <Number name="granted_QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="false" />
+        </Block>
+    </Block>
+</DataModel>
+
+<DataModel name="Unsubscribe" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="10"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="2"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" value="12" signed="false" endian="network" mutable="false"> 
+            <!-- <Relation type="size" of="remaining"/> -->
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="37878" signed="false" endian="network" mutable="false" />
+
+        <Number name="topic_length" size="16" value="8" signed="false" endian="network" mutable="false" >
+            <!-- <Relation type="size" of="topic"/> -->
+        </Number>
+        <Blob name="topic" size="64" value="74 65 73 74 2f 6f 70 69 " valueType="hex" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Unsubscribe_Ack" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="11"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" signed="false" endian="network" mutable="false"> 
+            <Relation type="size" of="remaining"/>
+        </Number>
+    </Block>
+    
+    <Block name="remaining" mutable="false">
+        <Number name="message_id" size="16" value="37878" signed="false" endian="network" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Ping_Request" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="12"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" value="0" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Ping_Response" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="13"  signed="false" endian="network" mutable="false" />
+        <Number name="reserved"     size="4" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" value="0" mutable="false" />
+    </Block>
+</DataModel>
+
+<DataModel name="Disconnect" mutable="false">
+    <!-- head -->
+    <Block name="head" mutable="false">
+        <Number name="message_type" size="4" value="14"  signed="false" endian="network" mutable="false" />
+        <Number name="DUP"          size="1" value="0"  signed="false" endian="network" mutable="false" />
+        <Number name="QoS_level"    size="2" value="0"  signed="false" endian="network" mutable="false" />
+        <Number name="retain"       size="1" value="0"  signed="false" endian="network" mutable="false" />
+
+        <Number name="remaining_length" size="8" value="0" mutable="false" />
+    </Block>
+</DataModel>
+  
+<StateModel name="mqttStateModel" initialState="test">
+	<State name="test">
+
+		<Action name="connect" type="output" publisher="client">
+			<DataModel ref="mqtt:Connect"/>
+		</Action>
+
+		<Action name="publish" type="output" publisher="client">
+			<DataModel ref="mqtt:Publish"/>
+		</Action>
+
+		<Action type="output" publisher="client">
+			<DataModel ref="mqtt:Publish_QoS1"/>
+		</Action>
+
+		<Action type="output" publisher="client">
+			<DataModel ref="mqtt:Publish_QoS2"/>
+		</Action>
+		
+		<Action type="output" publisher="client">
+			<DataModel ref="mqtt:Subscribe"/>
+		</Action>
+
+		<Action type="output" publisher="client">
+			<DataModel ref="mqtt:Unsubscribe"/>
+		</Action>
+
+		<Action type="output" publisher="client">
+			<DataModel ref="mqtt:Disconnect"/>
+		</Action>
+		
+	</State>
+</StateModel>
+
+
+<Agent name="LinAgent" >
+    <Monitor class="Process">
+            <Param name="Executable" value="/root/mosquitto/src/mosquitto" />
+            <Param name="Arguments" value="-p 4489" />
+            <Param name="RestartOnEachTest" value="false" />
+			<Param name="Faultonearlyexit" value="true" />
+			<Param name="StartOnCall" value="mqttCall"/>
+    </Monitor>
+</Agent> 
+
+
+<Test name="Default" replayEnabled="false">
+	<!-- <Param name="replayEnabled" value="false" /> -->
+	<Agent ref="LinAgent" platform="linux"/> 
+
+	<StateModel ref="mqttStateModel"/>
+	
+	<Publisher class="TcpClient" name="client">
+		<Param name="Host" value="127.0.0.1" />
+		<Param name="Port" value="4489" />
+	</Publisher>
+
+	<Strategy class="RandomDeterministic">
+	</Strategy>
+
+	<Logger class="File">
+		<Param name="Path" value="/root/logs" />
+	</Logger>
+</Test>
+
+</Peach>
+<!-- end -->
