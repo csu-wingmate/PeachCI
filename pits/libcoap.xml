@@ -326,7 +326,7 @@
 	</Strategy>
 
 	<Logger class="File">
-		<Param name="Path" value="LogsTask" />
+		<Param name="Path" value="/root/logs" />
 	</Logger>
 </Test>
 
