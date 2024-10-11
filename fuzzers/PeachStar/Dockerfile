@@ -21,16 +21,34 @@ RUN apt-get update && \
     apt-get update && apt install -y sudo vim git tar    
  
 WORKDIR /root
-RUN git clone https://github.com/THU-WingTecher/PeachStar.git && \
-    cd /root/PeachStar/compiler && \
-    apt install -y curl tar build-essential llvm llvm-dev && \
-    ./install-clang.sh && \
-    apt install libtinfo5 && \
-    make && make -C llvm_mode || true && \
-    cd llvm_mode && \
-    rm ../afl-llvm-pass.so || true && \
-    cd .. && \
-    make clean && make && \
+RUN git clone https://github.com/THU-WingTecher/PeachStar.git
+
+# 安装依赖
+RUN apt-get update && apt-get install -y curl tar build-essential llvm llvm-dev
+
+# 设置工作目录
+WORKDIR /root/PeachStar/compiler
+
+# 运行安装脚本
+RUN ./install-clang.sh
+
+# 安装额外的依赖
+RUN apt-get install -y libtinfo5
+
+# 编译项目
+RUN make || true
+
+# 设置工作目录为 llvm_mode
+WORKDIR /root/PeachStar/compiler/llvm_mode
+
+# 尝试编译 llvm_mode，如果失败则继续执行
+RUN make || true
+
+# 删除旧的目标文件，如果存在
+RUN rm ../afl-llvm-pass.so || true
+
+WORKDIR /root/PeachStar/compiler
+RUN make clean && make && \
     sudo apt-get install -y build-essential  \
     automake  \
     libtool  \
