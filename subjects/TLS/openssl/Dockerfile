@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # 更新包列表，安装所需软件包
 RUN apt-get update && \
-        apt-get upgrade -y && \
+    apt-get upgrade -y && \
     apt-get install -y \
     unzip \
     git build-essential \
@@ -35,14 +35,12 @@ RUN AFL_TRACE_PC=1 make
 
 WORKDIR /root
 
-RUN cd WORKDIR && \
-	git clone https://github.com/openssl/openssl.git && \
- 	cd openssl && \
-	CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 ./Configure --prefix=/usr/local && \
-	CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make && \
-	CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make install && \
-	cp /usr/local/lib64/* /usr/lib/
-
+RUN git clone https://github.com/openssl/openssl.git
+WORKDIR /root/openssl
+RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 ./Configure --prefix=/usr/local
+RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
+RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make install
+RUN cp -r /usr/local/lib64/* /usr/lib/
  
 
 WORKDIR /root
@@ -51,4 +49,3 @@ COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 
 # 容器启动命令
 CMD ["bash"]
-
