@@ -9,12 +9,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
-    openssl unzip  \
+    openssl unzip vim \
     git build-essential \
     libglib2.0-dev libcairo2-dev \
     autoconf \
-    llvm llvm-dev clang 
-
+    llvm llvm-dev clang && \
+    echo "set nu" >>  ~/.vimrc
 # 设置工作目录
 WORKDIR /root/
 
@@ -37,21 +37,23 @@ WORKDIR /root/pcguard-cov/llvm_mode
 RUN AFL_TRACE_PC=1 make
 
 WORKDIR /root
-RUN git clone https://github.com/Fuyulai-Hub/httpd.git httpd
-RUN cd httpd && tar -xzvf httpd-2.4.61.tar.gz && cd httpd-2.4.61/
-RUN apt-get update
-RUN apt install -y libapr1-dev
-RUN apt install -y libaprutil1-dev
+RUN git clone https://github.com/Fuyulai-Hub/httpd.git
+WORKDIR /root/httpd
+RUN tar -xzvf httpd-2.4.61.tar.gz 
+WORKDIR /root/httpd/httpd-2.4.61
+RUN apt-get update && \
+    apt install -y libapr1-dev libaprutil1-dev
 
-RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu
-
-RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 /root/httpd/httpd-2.4.61/configure --prefix=/usr/local
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu
+RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 ./configure --prefix=/usr/local
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make || true
+
 COPY --chown=ubuntu:ubuntu test_char.h /root/httpd/httpd-2.4.61/server/test_char.h
+
+RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make install
 
 WORKDIR /root
-
+COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 # 容器启动命令
 CMD ["bash"]
-
