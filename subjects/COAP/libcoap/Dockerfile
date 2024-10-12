@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # 更新包列表，安装所需软件包
 RUN apt-get update && \
-        apt-get upgrade -y && \
+    apt-get upgrade -y && \
     apt-get install -y \
     unzip \
     git build-essential \
@@ -35,10 +35,8 @@ WORKDIR /root/pcguard-cov/llvm_mode
 RUN AFL_TRACE_PC=1 make
 
 WORKDIR /root
-
-RUN cd WORKDIR && \
-	git clone https://github.com/obgm/libcoap.git && \
- 	cd libcoap 
+RUN git clone https://github.com/obgm/libcoap.git
+WORKDIR /root/libcoap 
 ENV CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++
 ENV CFLAGS="-Wall -O2 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard" CXXFLAGS="-Wall -O2 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fsanitize-coverage=trace-pc-guard"
 ENV LDFLAGS="-fsanitize=address,undefined"
@@ -53,4 +51,3 @@ COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 
 # 容器启动命令
 CMD ["bash"]
-
