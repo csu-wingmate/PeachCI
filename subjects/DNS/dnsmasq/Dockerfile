@@ -67,6 +67,7 @@ RUN mkdir /var/log/dnsmasq && \
     touch /var/log/dnsmasq/dnsmasq.log
 
 WORKDIR /root
+COPY --chown=ubuntu:ubuntu dnsmasq.conf /root/dns/dnsmasq.conf
 COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 # 容器启动命令
 CMD ["bash"]
