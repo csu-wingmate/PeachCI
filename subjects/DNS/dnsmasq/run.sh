@@ -27,5 +27,5 @@ python3 /root/collect.py ${cov_edge_path} \
 
 # Peach 模糊测试的路径
 export LUCKY_GLOBAL_MMAP_FILE=${cov_edge_path} SHM_ENV_VAR=${cov_bitmap_path} 
-/usr/local/sbin/dnsmasq -p 5353 -d -C /root/dns/conf/dnsmasq.conf -8 /var/log/dnsmasq/dnsmasq.log
+/usr/local/sbin/dnsmasq -p 5353 -d -C /root/dns/dnsmasq.conf -8 /var/log/dnsmasq/dnsmasq.log
 while true; do echo 'Worker: Hit CTRL+C'; sleep 1800; done
