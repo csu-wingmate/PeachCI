@@ -27,6 +27,6 @@ python3 /root/collect.py ${cov_edge_path} \
 
 # Peach 模糊测试的路径
 export LUCKY_GLOBAL_MMAP_FILE=${cov_edge_path} SHM_ENV_VAR=${cov_bitmap_path} 
-/usr/local/apache2/bin/apachectl -f /usr/local/apache2/conf/httpd.conf
+/usr/local/bin/apachectl -f /usr/local/conf/httpd.conf
 
 while true; do echo 'Worker: Hit CTRL+C'; sleep 1800; done
