@@ -282,19 +282,19 @@
 	<State name="test">
 
 		<Action name="put" type="output" publisher="client">
-			<DataModel ref="coap:Coap_PUT"/>
+			<DataModel ref="Coap_PUT"/>
 		</Action>
 
 		<Action name="get1" type="output" publisher="client">
-			<DataModel ref="coap:Coap_GET"/>
+			<DataModel ref="Coap_GET"/>
 		</Action>
 
 		<Action name="post" type="output" publisher="client">
-			<DataModel ref="coap:Coap_POST"/>
+			<DataModel ref="Coap_POST"/>
 		</Action>
 
 		<Action name="get2" type="output" publisher="client">
-			<DataModel ref="coap:Coap_GET"/>
+			<DataModel ref="Coap_GET"/>
 		</Action>
 	</State>
 </StateModel>
@@ -303,12 +303,11 @@
 <Agent name="LinAgent" >
     <Monitor class="Process">
         <Param name="Executable" value="/root/libcoap/examples/coap-server" />
-        <Param name="Arguments" value=" -A 127.0.0.1 -p 5577 -e -d 100 -v 9" />
+        <Param name="Arguments" value=" -p 6777 -e -d 100 -v 9" />
         <Param name="RestartOnEachTest" value="false" />
         <Param name="Faultonearlyexit" value="true" />
     </Monitor>
 </Agent> 
-
 
 <Test name="Default" replayEnabled="false">
 	<!-- <Param name="replayEnabled" value="false" /> -->
@@ -317,8 +316,8 @@
 	<StateModel ref="coapStateModel"/>
 	
 	<Publisher class="Udp" name="client">
-		<Param name="Host" value="127.0.0.1" />
-		<Param name="Port" value="5577" />
+		<Param name="Host" value="172.17.0.3" />
+		<Param name="Port" value="6777" />
 	</Publisher>
 
 	<Strategy class="Random">
