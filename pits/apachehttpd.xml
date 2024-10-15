@@ -138,8 +138,8 @@
   </StateModel>
  <Agent name="LinAgent">
     <Monitor class="Process">
-	 <Param name="Executable" value="/usr/local/apache2/bin/apachectl"/>
-	 <Param name="Arguments" value="-f /usr/local/apache2/conf/httpd.conf" />
+	 <Param name="Executable" value="/usr/local/bin/apachectl"/>
+	 <Param name="Arguments" value="-f /usr/local/conf/httpd.conf" />
 	   <Param name="RestartOnEachTest" value="true" />
             <Param name="Faultonearlyexit" value="False" />
     </Monitor>
@@ -153,7 +153,7 @@
 	  <Agent ref="LinAgent" />
     <StateModel ref="HttpStateModel"/>
     <Publisher class="tcp.Tcp">
-      <Param name="Host" value="localhost" />
+      <Param name="Host" value="172.17.0.3" />
       <Param name="Port" value="80" />
     </Publisher>
 
