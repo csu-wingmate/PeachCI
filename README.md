@@ -5,4 +5,4 @@ export PATH=$PATH:$PFBENCH/scripts/execution:$PFBENCH/scripts/analysis
 
 profuzzpeach_build_all.sh
 
-profuzzpeach_exe_common.sh lightftp 1 resuts-lightftp peach 30
+profuzzpeach_exec_common.sh lightftp 1 resuts-lightftp peach 30
