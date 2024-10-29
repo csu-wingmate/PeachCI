@@ -63,7 +63,8 @@ for fid in ${fids[@]}; do
   docker cp ${fid}:/root/logs ${SAVETO}/${FUZZER}_${index}_logs
 
   if [ ! -z $DELETE ]; then
-    printf "\nDeleting ${pid}"
+    printf "\nDeleting ${fid}"
+    docker stop ${fid}
     docker rm ${fid} # Remove container now that we don't need it
   fi
   index=$((index+1))
@@ -78,6 +79,7 @@ for pid in ${pids[@]}; do
 
   if [ ! -z $DELETE ]; then
     printf "\nDeleting ${pid}"
+    docker stop ${pid}
     docker rm ${pid} # Remove container now that we don't need it
   fi
   index=$((index+1))
@@ -86,7 +88,6 @@ done
 for i in $(seq 1 ${RUNS}); do
 
   rm  $PFBENCH/pits/${PROTOCOL}_run_${i}.xml
-
 
 done
 
