@@ -15,24 +15,21 @@ pids=() ## protocol container ids
 for i in $(seq 1 ${RUNS}); do
 
   # 启动Docker容器
-  fid=$(docker run --cpus=1 -d -it ${FUZZER} /bin/bash)
-  pid=$(docker run --cpus=1 -d -it ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh ${FUZZER}")
+  pid=$(docker run -d -it ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh")
 
   # protocol的IP地址
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
 
-  # XML文件路径
-  XML_FILE="$PFBENCH/pits/${PROTOCOL}.xml"
+  # 创建临时文件
+  TEMP_XML_FILE="$PFBENCH/pits/${PROTOCOL}_run_${i}.xml"
+  cp "$PFBENCH/pits/${PROTOCOL}.xml" "$TEMP_XML_FILE"
 
   # 使用sed命令替换Host参数的值
-  sed -i "s|<Param name=\"Host\" value=\".*\"/>|<Param name=\"Host\" value=\"$EXTERNAL_IP\"/>|" $XML_FILE
+sed -i -e 's|<Param name="Host" value="[^"]*"/>|<Param name="Host" value="'$EXTERNAL_IP'"/>|' "$TEMP_XML_FILE"
 
-  # 将本地文件复制到Docker容器的指定位置
-  docker cp $PFBENCH/pits/${PROTOCOL}.xml ${fid}:${WORKDIR}/tasks/${PROTOCOL}.xml
 
-  # 在容器内执行测试脚本
-  docker exec -d ${fid} /bin/bash -c "timeout ${TIMEOUT} mono /$FUZZERPATH/peach.exe ./tasks/${PROTOCOL}.xml"
-  
+  fid=$(docker run -v $PFBENCH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "timeout ${TIMEOUT} mono /root/Peach/bin/peach.exe /root/tasks/${PROTOCOL}_run_${i}.xml")
+ 
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
   pids+=(${pid::12}) # 只存储容器ID的前12个字符
@@ -46,7 +43,7 @@ container_list=$(printf "%s " "${all_containers[@]}")
 
 # 等待所有容器停止
 printf "\nWaiting for all containers to stop: ${container_list}"
-docker wait ${container_list} > /dev/null
+docker wait ${fids} > /dev/null
 
 # 可以省略以下循环，因为上面的docker wait已经等待所有容器
 # for container_id in "${all_containers[@]}"; do
@@ -86,6 +83,11 @@ for pid in ${pids[@]}; do
   index=$((index+1))
 done
 
+for i in $(seq 1 ${RUNS}); do
 
+  rm  $PFBENCH/pits/${PROTOCOL}_run_${i}.xml
+
+
+done
 
 printf "\n${FUZZER^^}: I am done!\n"
