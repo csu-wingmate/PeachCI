@@ -872,11 +872,11 @@
  <Agent ref="LinAgent" platform="linux"/>   
         <StateModel ref="dtls"/>
         <Publisher class="Udp" name="multicast">
-            <Param name="Host" value="127.0.0.1" />
+	 <Param name="Host" value="172.17.0.2"/>
             <Param name="Port" value="4444" />
         </Publisher>
         <Logger class="File">
-                <Param name="Path" value="/root/protocolFuzz/openssl/peach/logs"/>
+                <Param name="Path" value="/root/logs"/>
         </Logger>
 </Test>
 

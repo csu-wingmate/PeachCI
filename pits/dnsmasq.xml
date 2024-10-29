@@ -78,7 +78,7 @@
 <Agent name="LinAgent" >
     <Monitor class="Process" name="dns">
             <Param name="Executable" value="/usr/local/sbin/dnsmasq" />
-            <Param name="Arguments" value=" -p 5353 -d -C /root/dns/conf/dnsmasq.conf -8 /var/log/dnsmasq/dnsmasq.log" />
+            <Param name="Arguments" value=" -p 5353 -d -C /root/dns/dnsmasq.conf -8 /var/log/dnsmasq/dnsmasq.log" />
             <Param name="RestartOnEachTest" value="true" />
             <Param name="Faultonearlyexit" value="False" />
             <!-- <Param name="StartOnCall" value="hexdump"/> -->
@@ -89,7 +89,7 @@
         <Agent ref="LinAgent" platform="linux"/>
         <StateModel ref="dns"/>
         <Publisher class="Udp" name="multicast">
-            <Param name="Host" value="127.0.0.1" />
+	 <Param name="Host" value="172.17.0.2"/>
             <Param name="Port" value="5353" />
         </Publisher>
         <Logger class="File">

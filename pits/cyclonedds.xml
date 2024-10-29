@@ -576,7 +576,7 @@
 	<StateModel ref="DDSStateModel"/>
 
 	<Publisher class="Udp" name="unicast">
-		<Param name="Host" value="172.17.0.4" />
+	 <Param name="Host" value="172.17.0.2"/>
 		<Param name="Port" value="7400" />
 	</Publisher>
 

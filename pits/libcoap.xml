@@ -316,7 +316,7 @@
 	<StateModel ref="coapStateModel"/>
 	
 	<Publisher class="Udp" name="client">
-		<Param name="Host" value="172.17.0.3" />
+	 <Param name="Host" value="172.17.0.2"/>
 		<Param name="Port" value="6777" />
 	</Publisher>
 
