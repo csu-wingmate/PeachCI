@@ -54,4 +54,3 @@ ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # 容器启动命令
 CMD ["bash"]
-
