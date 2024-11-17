@@ -73,8 +73,6 @@ WORKDIR /root/
 RUN mkdir tasks
 RUN git clone https://github.com/THU-WingTecher/Charon.git
 
-# 设置工作目录
-WORKDIR /root/Charon/executable/
 
 
 # 容器启动命令
