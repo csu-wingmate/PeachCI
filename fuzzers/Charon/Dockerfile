@@ -73,6 +73,7 @@ WORKDIR /root/
 RUN mkdir tasks
 RUN git clone https://github.com/THU-WingTecher/Charon.git
 
+COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 
 
 # 容器启动命令
