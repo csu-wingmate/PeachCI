@@ -28,7 +28,7 @@ for i in $(seq 1 ${RUNS}); do
 sed -i -e 's|<Param name="Host" value="[^"]*"/>|<Param name="Host" value="'$EXTERNAL_IP'"/>|' "$TEMP_XML_FILE"
 
 
-  fid=$(docker run -v $PFBENCH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "timeout ${TIMEOUT} mono /root/Peach/bin/peach.exe /root/tasks/${PROTOCOL}_run_${i}.xml")
+  fid=$(docker run -v $PFBENCH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "./run.sh ${TIMEOUT} ${PROTOCOL} ${i}")
  
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
