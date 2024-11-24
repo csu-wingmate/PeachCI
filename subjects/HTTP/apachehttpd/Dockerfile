@@ -46,10 +46,10 @@ RUN apt-get update && \
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 ./configure --prefix=/usr/local
+COPY --chown=ubuntu:ubuntu test_char.h /root/httpd/httpd-2.4.61/server/test_char.h
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make || true
 
 COPY --chown=ubuntu:ubuntu test_char.h /root/httpd/httpd-2.4.61/server/test_char.h
-
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make
 RUN CC=/root/pcguard-cov/afl-clang-fast CXX=/root/pcguard-cov/afl-clang-fast++ AFL_USE_ASAN=1 make install
 
