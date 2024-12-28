@@ -50,7 +50,7 @@ docker build . -t lightftp
 - ***1st argument (PROTOCOL)*** : name of the protocol Implementation
 - ***2nd argument (RUNS)***     : number of runs, one isolated Docker container is spawned for each run
 - ***3rd argument (SAVETO)***   : path to a folder keeping the results
-- ***4th argument (FUZZER)***   : fuzzer name (e.g., aflnet) -- this name must match the name of the fuzzer folder inside the Docker container (e.g., /home/ubuntu/aflnet)
+- ***4th argument (FUZZER)***   : fuzzer name (e.g., peach) -- this name must match the name of the fuzzer folder inside the Docker container 
 - ***5th argument (TIMEOUT)***  : time for fuzzing in seconds
 The following commands run 4 instances of Peach and 4 instances of Peach* to simultaneously fuzz LightFTP for 5 minutes.
 
@@ -80,6 +80,8 @@ cd $CIPATH/results-lightftp
 profuzzbench_plot.py -i <input_data> -o <output_plot_file>
 ```
 Replace <input_data> with the path to your coverage data and <output_plot_file> with the desired filename for your plot.
+This is an example of the generated code coverage report, potential vulnerabilities, and test execution speed.
+![Grafana-Dashboard](https://github.com/csu-wingmate/profuzzpeach/blob/main/figures/Grafana-Dashboard.png)
 
 # Utility Scripts
 PeachCI includes scripts for building and running all fuzzers on all targets with pre-configured parameters. To build all targets for all fuzzers, run the script build_all.sh. To execute the fuzzers, use the script exec_all.sh.
@@ -93,3 +95,21 @@ The folder for LightFTP server is located at subjects/FTP/LightFTP.
 
 ### Step-2. Write a Dockerfile and prepare subject-specific scripts/files
 Refer to the existing folder structure for LightFTP
+```
+subjects/FTP/LightFTP
+├── Dockerfile (required): based on this, a target-specific Docker image is built (See Step-1 in the tutorial)
+├── run.sh (required): main script to run experiment inside a container
+├── cov_script.sh (required): script to do code coverage analysis
+├── clean.sh (optional): script to clean server states before fuzzing to improve the stability
+├── fuzzing.patch (optional): code changes needed to improve fuzzing results (e.g., remove randomness)
+├── gcov.patch (required): code changes needed to support code coverage analysis (e.g., enable gcov, add a signal handler)
+├── ftp.dict (optional): a dictionary containing protocol-specific tokens/keywords to support fuzzing
+└── in-ftp (required): a seed corpus capturing sequences of client requests sent to the server under test.
+│   │       To prepare these seeds, please follow the AFLNet tutorial at https://github.com/aflnet/aflnet.
+│   │       Please use ".raw" extension for all seed inputs.
+│   │
+│   └── ftp_requests_full_anonymous.raw
+│   └── ftp_requests_full_normal.raw
+└── README.md (optional): a target-specific README containing commands to run experiments
+```
+All the required files (i.e., Dockerfile, run.sh) follow some templates so that one can easily follow them to prepare files for a new target.
