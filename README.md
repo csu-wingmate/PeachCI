@@ -14,7 +14,7 @@ PeachCI
 │       └── Dockerfile: for building the Docker image specific to the fuzzing tool
 │       └── run.sh: main script to fuzzing inside a Docker container
 │       └── other necessary files (e.g.scripts)
-├── fuzzers: folders for different Pit files 
+├── pits: folders for different Pit files 
 │   └── lightftp.xml
 │   └── dnsmasq.xml
 └── scripts: contains all scripts for running experiments and analyzing results
