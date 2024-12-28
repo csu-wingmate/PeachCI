@@ -14,7 +14,7 @@ PeachCI
 │       └── Dockerfile: for building the Docker image specific to the fuzzing tool
 │       └── run.sh: main script to fuzzing inside a Docker container
 │       └── other necessary files (e.g.scripts)
-├── pits: folders for different Pit files 
+├── pits: folders for different Pit files -- The naming of the pit file must match the protocol implementation.
 │   └── lightftp.xml
 │   └── dnsmasq.xml
 └── scripts: contains all scripts for running experiments and analyzing results
@@ -47,19 +47,20 @@ docker build . -t lightftp
 ```
 
 ## Step-2. Run fuzzing
-- ***1st argument (PROTOCOL)*** : name of the protocol Implementation
+- ***1st argument (PROTOCOL)*** : name of the protocol Implementation(e.g., lightftp)
 - ***2nd argument (RUNS)***     : number of runs, one isolated Docker container is spawned for each run
 - ***3rd argument (SAVETO)***   : path to a folder keeping the results
-- ***4th argument (FUZZER)***   : fuzzer name (e.g., peach) -- this name must match the name of the fuzzer folder inside the Docker container 
+- ***4th argument (FUZZER)***   : fuzzer name (e.g., peach) 
 - ***5th argument (TIMEOUT)***  : time for fuzzing in seconds
-The following commands run 4 instances of Peach and 4 instances of Peach* to simultaneously fuzz LightFTP for 5 minutes.
+
+
+The following commands run 4 instances of Peach to simultaneously fuzz LightFTP for 5 minutes.
 
 ```bash
 cd $CIPATH
 mkdir results-lightftp
 
-exec_common.sh lightftp 4 results-lightftp peach 300 &
-exec_common.sh lightftp 4 results-lightftp peachstar 300
+exec_common.sh lightftp 4 results-lightftp peach 300
 ```
 
 A successful script execution will produce output similar to this:
