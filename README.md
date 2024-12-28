@@ -24,7 +24,7 @@ PeachCI
 └── README.md: this file
 ```
 
-# Tutorial - Fuzzing LightFTP server with Peach and Peach*
+# Tutorial - Fuzzing LightFTP server with Peach
 ## Step-0. Set up environmental variables
 ```
 git clone https://github.com/csu-wingmate/PeachCI.git
