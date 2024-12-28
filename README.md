@@ -1,4 +1,4 @@
-# PeachCI - A Toolkit for Protocol Fuzzing with Peach and Peach
+# PeachCI - Scalable Continuous Integration of Generation-Based Protocol Fuzzing
 
 # Folder Structure
 ```
