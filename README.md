@@ -31,7 +31,7 @@ git clone https://github.com/csu-wingmate/PeachCI.git
 cd PeachCI
 export CIPATH=$(pwd)
 export PATH=$PATH:$CIPATH/scripts/execution:$CIPATH/scripts/analysis
-./setup.sh
+setup.sh
 ```
 
 ## Step-1. Build a Fuzzer Docker image and a Protocol Docker image
