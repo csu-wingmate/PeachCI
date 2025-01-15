@@ -34,7 +34,7 @@ do
         if [[ $TARGET == "lightftp" ]] || [[ $TARGET == "all" ]]
         then
 
-            cd $PFBENCH
+            cd $CIPATH
             mkdir results-lightftp
 
             if [[ $FUZZER == "peach" ]] || [[ $FUZZER == "all" ]]
@@ -59,7 +59,7 @@ do
         if [[ $TARGET == "dnsmasq" ]] || [[ $TARGET == "all" ]]
         then
 
-            cd $PFBENCH
+            cd $CIPATH
             mkdir results-dnsmasq
 
             if [[ $FUZZER == "peach" ]] || [[ $FUZZER == "all" ]]
@@ -85,7 +85,7 @@ do
         if [[ $TARGET == "cyclonedds" ]] || [[ $TARGET == "all" ]]
         then
 
-            cd $PFBENCH
+            cd $CIPATH
             mkdir results-cyclonedds
 
             if [[ $FUZZER == "peach" ]] || [[ $FUZZER == "all" ]]
@@ -112,7 +112,7 @@ do
         if [[ $TARGET == "libcoap" ]] || [[ $TARGET == "all" ]]
         then
 
-            cd $PFBENCH
+            cd $CIPATH
             mkdir results-libcoap
 
             if [[ $FUZZER == "peach" ]] || [[ $FUZZER == "all" ]]
@@ -136,7 +136,7 @@ do
         if [[ $TARGET == "openssl" ]] || [[ $TARGET == "all" ]]
         then
 
-            cd $PFBENCH
+            cd $CIPATH
             mkdir results-openssl
 
             if [[ $FUZZER == "peach" ]] || [[ $FUZZER == "all" ]]
@@ -161,7 +161,7 @@ do
         if [[ $TARGET == "apachehttpd" ]] || [[ $TARGET == "all" ]]
         then
 
-            cd $PFBENCH
+            cd $CIPATH
             mkdir results-apachehttpd
 
             if [[ $FUZZER == "peach" ]] || [[ $FUZZER == "all" ]]
