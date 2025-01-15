@@ -21,14 +21,14 @@ for i in $(seq 1 ${RUNS}); do
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
 
   # 创建临时文件
-  TEMP_XML_FILE="$PFBENCH/pits/${PROTOCOL}_run_${i}.xml"
-  cp "$PFBENCH/pits/${PROTOCOL}.xml" "$TEMP_XML_FILE"
+  TEMP_XML_FILE="$CIPATH/pits/${PROTOCOL}_run_${i}.xml"
+  cp "$CIPATH/pits/${PROTOCOL}.xml" "$TEMP_XML_FILE"
 
   # 使用sed命令替换Host参数的值
 sed -i -e 's|<Param name="Host" value="[^"]*"/>|<Param name="Host" value="'$EXTERNAL_IP'"/>|' "$TEMP_XML_FILE"
 
 
- fid=$(docker run -v $PFBENCH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "./run.sh ${TIMEOUT} ${PROTOCOL} ${i}")
+ fid=$(docker run -v $CIPATH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "./run.sh ${TIMEOUT} ${PROTOCOL} ${i}")
  
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
@@ -87,7 +87,7 @@ done
 
 for i in $(seq 1 ${RUNS}); do
 
-  rm  $PFBENCH/pits/${PROTOCOL}_run_${i}.xml
+  rm  $CIPATH/pits/${PROTOCOL}_run_${i}.xml
 
 done
 
