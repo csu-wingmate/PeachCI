@@ -73,6 +73,8 @@ WORKDIR /root/
 RUN mkdir tasks
 RUN git clone https://github.com/THU-WingTecher/Charon.git
 
+COPY --chown=ubuntu:ubuntu collect_faults.py /root/collect_faults.py
+COPY --chown=ubuntu:ubuntu collect_iteration.py /root/collect_iteration.py
 COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 
 
