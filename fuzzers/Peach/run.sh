@@ -5,6 +5,10 @@ PROTOCOL=$2
 i=$3
 OPTION=$4
 
+python3 collect_faults.py /root/logs/potential_vulnerability.prom peach ${PROTOCOL} &
+
+python3 collect_iteration.py /root/logs/iteration.prom peach ${PROTOCOL} &
+
 if [[ $OPTION == -p* ]]; then
     work_num=$(echo "$OPTION" | cut -d' ' -f2)
     for j in $(seq 1${work_num}) ; do
