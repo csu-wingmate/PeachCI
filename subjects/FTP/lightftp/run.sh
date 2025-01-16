@@ -27,6 +27,10 @@ python3 /root/collect.py ${cov_edge_path} \
     
 python3 /root/collect_prometheus.py ${cov_edge_path}  "/root/branch/${FUZZER}_branch_${project}_${t}_${port}.prom" ${FUZZER} ${project} &
 
+tmux new-session -d -s ${FUZZER}_${project}_node_expoter
+# 在新的tmux窗口中运行命令
+tmux new-window -t ${FUZZER}_${project}_node_expoter:1 -n "node_exporter" "exec /root/pcguard-cov/node_exporter/bin/node_exporter --collector.textfile.directory=\"/root/branch\""
+
 # Peach 模糊测试的路径
 export LUCKY_GLOBAL_MMAP_FILE=${cov_edge_path} SHM_ENV_VAR=${cov_bitmap_path} 
 /root/LightFTP/Source/Release/fftp /root/LightFTP/Bin/fftp.conf 
