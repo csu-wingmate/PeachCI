@@ -51,6 +51,8 @@ RUN clang control.c -fPIC -shared -o libpeachControl.so && \
 # 设置环境变量
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 WORKDIR /root/
+COPY --chown=ubuntu:ubuntu collect_faults.py /root/collect_faults.py
+COPY --chown=ubuntu:ubuntu collect_iteration.py /root/collect_iteration.py
 COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
 
 
