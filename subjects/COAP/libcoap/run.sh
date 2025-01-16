@@ -22,7 +22,9 @@ mkdir branch
 
 # 运行收集器
 python3 /root/collect.py ${cov_edge_path} \
-    "./branch/collect_branch_mutable_${project}_${t}_${port}" &
+    "./branch/${FUZZER}_branch_${project}_${t}_${port}" &
+    
+python3 /root/collect_prometheus.py ${cov_edge_path}  "/root/branch/${FUZZER}_branch_${project}_${t}_${port}.prom" ${FUZZER} ${project} &
 
 # Peach 模糊测试的路径
 export LUCKY_GLOBAL_MMAP_FILE=${cov_edge_path} SHM_ENV_VAR=${cov_bitmap_path} 
