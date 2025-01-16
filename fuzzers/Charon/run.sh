@@ -9,6 +9,10 @@ dd if=/dev/zero bs=10M count=1 of=$name-of-shared-memory
 export LD_LIBRARY_PATH=/root/Charon/:$LD_LIBRARY_PATH
 export SHM_ENV_VAR=/dev/shm/$name-of-shared-memory
 
+python3 collect_faults.py /root/logs/potential_vulnerability.prom charon ${PROTOCOL} &
+
+python3 collect_iteration.py /root/logs/iteration.prom charon ${PROTOCOL} &
+
 if [[ $OPTION == -p* ]]; then
     work_num=$(echo "$OPTION" | cut -d' ' -f2)
     for j in $(seq 1${work_num}) ; do
