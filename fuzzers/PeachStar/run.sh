@@ -8,9 +8,9 @@ cd /dev/shm
 dd if=/dev/zero bs=10M count=1 of=$name-of-shared-memory
 export SHM_ENV_VAR=/dev/shm/$name-of-shared-memory
 
-python3 collect_faults.py /root/logs/potential_vulnerability.prom peachstar ${PROTOCOL} &
+python3 collect_faults.py potential_vulnerability.prom peachstar ${PROTOCOL} &
 
-python3 collect_iteration.py /root/logs/iteration.prom peachstar ${PROTOCOL} &
+python3 collect_iteration.py iteration.prom peachstar ${PROTOCOL} &
 
 if [[ $OPTION == -p* ]]; then
     work_num=$(echo "$OPTION" | cut -d' ' -f2)
