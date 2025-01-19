@@ -22,10 +22,12 @@ for i in $(seq 1 ${RUNS}); do
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
   sed -i -e '/job_name: "prometheus"/,/targets:/ {
       /targets:/ {
-          s/]/, "'$EXTERNAL_IP':9100"/
+          s/]/, "'$EXTERNAL_IP':9100"]/
       }
-  }' -e '$s/}/, "'$EXTERNAL_IP':9100"]}/' $CIPATH/scripts/analysis/prometheus/conf/prometheus.yml
+  }' $CIPATH/scripts/analysis/prometheus/conf/prometheus.yml
   
+  systemctl restart prometheus
+
   # 创建临时文件
   TEMP_XML_FILE="$CIPATH/pits/${PROTOCOL}_run_${i}.xml"
   cp "$CIPATH/pits/${PROTOCOL}.xml" "$TEMP_XML_FILE"
@@ -40,9 +42,6 @@ for i in $(seq 1 ${RUNS}); do
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
   pids+=(${pid::12}) # 只存储容器ID的前12个字符
 done
-
-  sed -i '$a ]' $CIPATH/scripts/analysis/prometheus/conf/prometheus.yml
-  systemctl restart prometheus
 
 # 合并fuzzer和protocol容器的ID列表
 all_containers=("${fids[@]}" "${pids[@]}")
