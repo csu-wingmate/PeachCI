@@ -96,8 +96,7 @@ Refer to the existing folder structure for LightFTP
 ```
 subjects/FTP/LightFTP
 ├── Dockerfile (required): based on this, a target-specific Docker image is built (See Step-1 in the tutorial)
-├── run.sh (required): main script to run experiment inside a container
-└── README.md (optional): a target-specific README containing commands to run experiments
+└── run.sh (required): main script to run experiment inside a container
 ```
 All the required files (i.e., Dockerfile, run.sh) follow some templates so that one can easily follow them to prepare files for a new target.
 
@@ -112,7 +111,6 @@ Refer to the existing folder structure for PeachStar
 ```
 fuzzers/PeachStar
 ├── Dockerfile (required): based on this, a Docker image is built (See Step-1 in the tutorial)
-├── run.sh (required): main script to run experiment inside a container
-└── README.md (optional): a target-specific README containing commands to run experiments
+└── run.sh (required): main script to run experiment inside a container
 ```
 All the required files (i.e., Dockerfile, run.sh) follow some templates so that one can easily follow them to prepare files for a new fuzzer.
