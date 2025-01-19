@@ -52,6 +52,7 @@ docker build . -t lightftp
 - ***3rd argument (SAVETO)***   : path to a folder keeping the results
 - ***4th argument (FUZZER)***   : fuzzer name (e.g., peach) 
 - ***5th argument (TIMEOUT)***  : time for fuzzing in seconds
+- ***6th argument (OPTION)***  : configurations for the fuzzers (you can choose whether or not to use)
 
 
 The following commands run 4 instances of Peach to simultaneously fuzz LightFTP for 5 minutes.
