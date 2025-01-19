@@ -4,7 +4,8 @@ RUNS=$2       #number of runs
 SAVETO=$3     #path to folder keeping the results
 FUZZER=$4     #fuzzer name (e.g., peach) 
 TIMEOUT=$5    #time for fuzzing
-DELETE=$6
+OPTION=$6     #all configured options for fuzzing
+DELETE=$7
 
 WORKDIR="/root"
 
@@ -19,16 +20,25 @@ for i in $(seq 1 ${RUNS}); do
 
   # protocol的IP地址
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
-
+  sed -i -e '/job_name: "prometheus"/,/targets:/ {
+      /targets:/ {
+          s/]/, "$EXTERNAL_IP:9100"/
+      }
+  }' -e '$s/}/, "$EXTERNAL_IP:9100"]}/' $CIPATH/scripts/analysis/prometheus/conf/prometheus.yml
+  
+  sed -i '$a ]' $CIPATH/scripts/analysis/prometheus/conf/prometheus.yml
+  
+  systemctl restart prometheus
+  
   # 创建临时文件
   TEMP_XML_FILE="$CIPATH/pits/${PROTOCOL}_run_${i}.xml"
   cp "$CIPATH/pits/${PROTOCOL}.xml" "$TEMP_XML_FILE"
 
   # 使用sed命令替换Host参数的值
-sed -i -e 's|<Param name="Host" value="[^"]*"/>|<Param name="Host" value="'$EXTERNAL_IP'"/>|' "$TEMP_XML_FILE"
+  sed -i -e 's|<Param name="Host" value="[^"]*"/>|<Param name="Host" value="'$EXTERNAL_IP'"/>|' "$TEMP_XML_FILE"
 
 
- fid=$(docker run -v $CIPATH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "./run.sh ${TIMEOUT} ${PROTOCOL} ${i}")
+ fid=$(docker run -v $CIPATH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "./run.sh ${TIMEOUT} ${PROTOCOL} ${i} ${OPTION}")
  
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
