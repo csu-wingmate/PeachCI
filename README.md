@@ -71,11 +71,13 @@ Peach: Waiting for the following containers to stop:  f2da4b72b002 b7421386b288 
 Peach: I am done!
 ```
 
-## Step-3. Collect the results
+## Step-3. Collect and analyze the results
 All results are stored in tar files within the folder created in Step-2 (results-lightftp). This includes directories named similarly to peach-1-branch and peach-1-logs, where peach-1-branch contains the collected branch coverage data and peach-1-logs contains the log files from the Peach testing process, including the number of test runs and potential bug reports.
-
-## Step-4. Analyze the results
 The data collected in Step 3 on branch coverage counts, potential vulnerabilities, etc. can be used for plotting. We used Prometheus to collect the data and Grafana for visualising data such as code coverage over time.
+```bash
+snap start grafana
+```
+Launch Grafana and access the Grafana website at localhost:3000 (login with the username and password both set to ‘admin’). In the settings, select Prometheus as the data source for collection, and import our [dashboard template](https://github.com/csu-wingmate/PeachCI/blob/main/scripts/analysis/Node%20Exporter.json) to utilize our custom dashboard.
 
 This is an example of the generated code coverage report, potential vulnerabilities, and fuzzing iteration times.
 ![Grafana-Dashboard](https://github.com/csu-wingmate/profuzzpeach/blob/main/figures/Grafana-Dashboard.png)
