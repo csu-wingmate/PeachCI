@@ -31,7 +31,7 @@ RUN unzip -o pcguard-cov.zip
 # 编译 pcguard-cov
 RUN make
 RUN cp collect.py /root/collect.py
-RUN cp collect.py /root/collect_prometheus.py
+RUN cp collect_prometheus.py /root/collect_prometheus.py
 
 # 切换到 llvm_mode 目录并编译
 WORKDIR /root/pcguard-cov/llvm_mode
