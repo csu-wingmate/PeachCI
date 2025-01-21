@@ -16,7 +16,7 @@ pids=() ## protocol container ids
 for i in $(seq 1 ${RUNS}); do
 
   # 启动Docker容器
-  pid=$(docker run -d -it ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh ${FUZZER} ${i}")
+  pid=$(docker run -d -it ${PROTOCOL} /bin/bash -c "mkdir /root/branch & /root/node_exporter/node_exporter --collector.textfile.directory=\"/root/branch\" & ./run.sh ${FUZZER} ${i}")
 
   # protocol的IP地址
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
@@ -36,7 +36,7 @@ for i in $(seq 1 ${RUNS}); do
   sed -i -e 's|<Param name="Host" value="[^"]*"/>|<Param name="Host" value="'$EXTERNAL_IP'"/>|' "$TEMP_XML_FILE"
 
 
- fid=$(docker run -v $CIPATH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "./run.sh ${TIMEOUT} ${PROTOCOL} ${i} ${OPTION}")
+ fid=$(docker run -v $CIPATH/pits/:/root/tasks/ -d -it ${FUZZER} /bin/bash -c  "/root/node_exporter/node_exporter --collector.textfile.directory=\"/root/branch\" & ./run.sh ${TIMEOUT} ${PROTOCOL} ${i} ${OPTION}")
  
   # 存储容器ID
   fids+=(${fid::12}) # 只存储容器ID的前12个字符
