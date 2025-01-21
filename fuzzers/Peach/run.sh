@@ -5,9 +5,9 @@ PROTOCOL=$2
 i=$3
 OPTION=$4
 
-python3 collect_faults.py potential_vulnerability.prom peach ${PROTOCOL} &
+python3 collect_faults.py potential_vulnerability.prom peach ${PROTOCOL} ${i} &
 
-python3 collect_iteration.py iteration.prom peach ${PROTOCOL} &
+python3 collect_iteration.py iteration.prom peach ${PROTOCOL} ${i} &
 
 if [[ $OPTION == -p* ]]; then
     work_num=$(echo "$OPTION" | cut -d' ' -f2)
