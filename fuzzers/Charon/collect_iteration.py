@@ -8,6 +8,7 @@ import sys
 output_file_path = sys.argv[1]
 fuzzer = sys.argv[2]
 protocol = sys.argv[3]
+i = sys.argv[4]
 
 # 初始化一个字典来存储每个目录的已处理迭代次数
 last_processed_iterations = {}
@@ -47,7 +48,7 @@ while True:
                                 os.remove(output_file_path)
 
                             with open(output_file_path, "a") as f:  # 打开文件以追加模式
-                                f.write(f'Iteration_{fuzzer}_{dir_name}{{job="Iteration"}} {iteration_number}\n')
+                                f.write(f'Iteration_{fuzzer}_{dir_name}_{i}{{job="Iteration"}} {iteration_number}\n')
                                 print(f"Updated current iteration for {dir_name}: {iteration_number}")
 
                             # 更新已处理的迭代次数
