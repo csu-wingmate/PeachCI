@@ -9,7 +9,7 @@ import re
 output_file_path = sys.argv[1]
 fuzzer = sys.argv[2]
 protocol = sys.argv[3]
-
+i = sys.argv[4]
 # 获取本机 IP 地址
 def get_host_ip():
     try:
@@ -58,7 +58,7 @@ while True:
                         with open(output_file_path, 'w') as prom_file:
                             for fault_name, count in fault_counts.items():
                                 # 写入 Prometheus 指标行
-                                prom_file.write(f'{fuzzer}_{protocol}_bugs{{host="{host_ip}", bug_host="{fault_directory}", bug_name="{fault_name}", number="{count}", fuzzer="{fuzzer}", protocol_implement="{protocol}"}} 1\n')
+                                prom_file.write(f'{fuzzer}_{protocol}_{i}_bugs{{host="{host_ip}", bug_host="{fault_directory}", bug_name="{fault_name}", number="{count}", fuzzer="{fuzzer}", protocol_implement="{protocol}"}} 1\n')
                                 # 打印故障名称及其数量
                                 print(f"Host: {host_ip}, Bug Host: {fault_directory}, Bug Name: {fault_name}, Number: {count}, Fuzzer: {fuzzer}, Protocol Implement: {protocol}")
                     else:
