@@ -16,7 +16,7 @@ pids=() ## protocol container ids
 for i in $(seq 1 ${RUNS}); do
 
   # 启动Docker容器
-  pid=$(docker run -d -it ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh")
+  pid=$(docker run -d -it ${PROTOCOL} /bin/bash -c "cd ${WORKDIR} && ./run.sh ${FUZZER} ${i}")
 
   # protocol的IP地址
   EXTERNAL_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${pid})
