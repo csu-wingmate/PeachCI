@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:2325",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -18,7 +17,7 @@
   "gnetId": 12062,
   "graphTooltip": 0,
   "id": 4,
-  "iteration": 1735974040960,
+  "iteration": 1737450424037,
   "links": [],
   "panels": [
     {
@@ -251,26 +250,7 @@
           "unit": "short"
         }
       ],
-      "targets": [
-        {
-          "expr": "charon_dns_bugs",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        },
-        {
-          "expr": "peachstar_dns_bugs",
-          "format": "table",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
+      "targets": [],
       "timeFrom": null,
       "timeShift": null,
       "title": "Potential Vulnerabilities",
@@ -286,10 +266,195 @@
       "fill": 2,
       "fillGradient": 1,
       "gridPos": {
-        "h": 12,
+        "h": 18,
         "w": 12,
         "x": 0,
         "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 187,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "branch_coverage_peach_lightftp2",
+          "interval": "",
+          "legendFormat": "peach",
+          "refId": "B"
+        },
+        {
+          "expr": "branch_coverage_peachstar_lightftp2",
+          "interval": "",
+          "legendFormat": "peachstar",
+          "refId": "C"
+        },
+        {
+          "expr": "branch_coverage_charon_lightftp2",
+          "interval": "",
+          "legendFormat": "charon",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "lightftp",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 2,
+      "fillGradient": 1,
+      "gridPos": {
+        "h": 18,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 195,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Fuzzing Iteration Times",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 2,
+      "fillGradient": 1,
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 0,
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 185,
@@ -391,10 +556,10 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 28
       },
       "hiddenSeries": false,
-      "id": 195,
+      "id": 183,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -422,29 +587,29 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "Iteration_peach_dns",
+          "expr": "branch_coverage_peach_libcoap",
           "interval": "",
           "legendFormat": "peach",
+          "refId": "C"
+        },
+        {
+          "expr": "branch_coverage_peachstar_libcoap",
+          "interval": "",
+          "legendFormat": "peachstar",
           "refId": "A"
         },
         {
-          "expr": "Iteration_peachstar_dns",
-          "interval": "",
-          "legendFormat": "peachstar",
-          "refId": "B"
-        },
-        {
-          "expr": "Iteration_charon_dns",
+          "expr": "branch_coverage_charon_libcoap",
           "interval": "",
           "legendFormat": "charon",
-          "refId": "C"
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Execution Speed",
+      "title": "libcoap",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -494,7 +659,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 40
       },
       "hiddenSeries": false,
       "id": 181,
@@ -594,112 +759,10 @@
       "fill": 2,
       "fillGradient": 1,
       "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 12,
-        "y": 22
-      },
-      "hiddenSeries": false,
-      "id": 183,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "connected",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "branch_coverage_peach_libcoap",
-          "interval": "",
-          "legendFormat": "peach",
-          "refId": "C"
-        },
-        {
-          "expr": "branch_coverage_peachstar_libcoap",
-          "interval": "",
-          "legendFormat": "peachstar",
-          "refId": "A"
-        },
-        {
-          "expr": "branch_coverage_charon_libcoap",
-          "interval": "",
-          "legendFormat": "charon",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "libcoap",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 2,
-      "fillGradient": 1,
-      "gridPos": {
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 32
+        "y": 40
       },
       "hiddenSeries": false,
       "id": 189,
@@ -801,109 +864,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 34
-      },
-      "hiddenSeries": false,
-      "id": 187,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "connected",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "branch_coverage_peach_lightftp2",
-          "interval": "",
-          "legendFormat": "peach",
-          "refId": "B"
-        },
-        {
-          "expr": "branch_coverage_peachstar_lightftp2",
-          "interval": "",
-          "legendFormat": "peachstar",
-          "refId": "C"
-        },
-        {
-          "expr": "branch_coverage_charon_lightftp2",
-          "interval": "",
-          "legendFormat": "charon",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "lightftp",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 2,
-      "fillGradient": 1,
-      "gridPos": {
-        "h": 12,
-        "w": 12,
-        "x": 0,
-        "y": 46
+        "y": 52
       },
       "hiddenSeries": false,
       "id": 191,
@@ -1006,7 +967,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "",
+          "isNone": true,
+          "selected": false,
+          "text": "None",
           "value": ""
         },
         "datasource": "Prometheus",
@@ -1032,10 +995,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "",
-          "value": [
-            ""
-          ]
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "Prometheus",
         "definition": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
@@ -1177,8 +1139,8 @@
     ]
   },
   "time": {
-    "from": "2024-11-30T09:36:00.000Z",
-    "to": "2024-12-01T09:36:00.000Z"
+    "from": "now-5m",
+    "to": "now"
   },
   "timepicker": {
     "hidden": false,
@@ -1213,5 +1175,5 @@
   "variables": {
     "list": []
   },
-  "version": 39
+  "version": 43
 }
