@@ -1,5 +1,6 @@
 #!/bin/bash
 FUZZER=$1 
+i=$2
 # 协议和项目名称
 protocol=TLS
 project=openssl
@@ -25,7 +26,7 @@ mkdir /root/branch
 python3 /root/collect.py ${cov_edge_path} \
     "/root/branch/${FUZZER}_branch_${project}_${t}_${port}" &
     
-python3 /root/collect_prometheus.py ${cov_edge_path}  "/root/branch/${FUZZER}_branch_${project}_${t}_${port}.prom" ${FUZZER} ${project} &
+python3 /root/collect_prometheus.py ${cov_edge_path}  "/root/branch/${FUZZER}_branch_${project}_${t}_${port}.prom" ${FUZZER} ${project} ${i} &
 
 tmux new-session -d -s ${FUZZER}_${project}_node_expoter
 # 在新的tmux窗口中运行命令
