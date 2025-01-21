@@ -67,7 +67,7 @@ COPY --chown=ubuntu:ubuntu Peach /root/Peach/
 COPY --chown=ubuntu:ubuntu collect_faults.py /root/collect_faults.py
 COPY --chown=ubuntu:ubuntu collect_iteration.py /root/collect_iteration.py
 COPY --chown=ubuntu:ubuntu --chmod=755 run.sh /root/run.sh
-
+RUN sed -i 's/\r$//' run.sh
 
 # 容器启动命令
 CMD ["bash"]
