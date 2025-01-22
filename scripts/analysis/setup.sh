@@ -2,7 +2,7 @@
 
 # Prometheus 安装步骤
 cd $CIPATH/scripts/analysis
-wget https://github.com/prometheus/prometheus/releases/download/v2.49.1/prometheus-2.49.1.linux-amd64.tar.gz
+wget -N https://github.com/prometheus/prometheus/releases/download/v2.49.1/prometheus-2.49.1.linux-amd64.tar.gz
 tar -zxvf prometheus-2.49.1.linux-amd64.tar.gz
 mv prometheus-2.49.1.linux-amd64 prometheus
 cd prometheus/
