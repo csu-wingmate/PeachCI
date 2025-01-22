@@ -21,9 +21,3 @@ else
     timeout ${TIMEOUT} mono /root/Peach/bin/peach.exe${OPTION} /root/tasks/${PROTOCOL}_run_${i}.xml &
 fi
 
-# 无限循环，可以按CTRL+C退出
-while true; do
-    echo 'Worker: Hit CTRL+C to exit'
-    sleep 1800
-done
-
