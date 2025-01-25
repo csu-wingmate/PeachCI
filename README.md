@@ -118,4 +118,4 @@ fuzzers/PeachStar
 All the required files (i.e., Dockerfile, run.sh) follow some templates so that one can easily follow them to prepare files for a new fuzzer.
 
 # Demo Video
-[Click to view the demo video](https://github.com/csu-wingmate/PeachCI/blob/main/video/peachci.mp4)
+[Click to view the demo video](https://objects.githubusercontent.com/github-production-release-asset-2e65be/851503530/89708370-7116-450e-a344-02b773bfca16?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20250125%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250125T021025Z&X-Amz-Expires=300&X-Amz-Signature=ba1e5a2f776a25d84d1ef7139b28ffb445122637407fc5f78be7f103bbcefe46&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dpeachci.mp4&response-content-type=application%2Foctet-stream)
