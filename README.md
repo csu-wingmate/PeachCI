@@ -102,7 +102,7 @@ subjects/FTP/LightFTP
 ```
 All the required files (i.e., Dockerfile, run.sh) follow some templates so that one can easily follow them to prepare files for a new target.
 
-### 1）add a fuzzer
+### 2）add a fuzzer
 To add a new fuzzer, follow the folder structure outlined above and complete the following steps, using PeachStar as an example:
 
 #### Step-1. Create a new folder for fuzzer
