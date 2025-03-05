@@ -19,7 +19,7 @@ WORKDIR /root/
 
 # 安装其他依赖包
 RUN apt-get install -y \
-    gnutls-dev libgnutls28-dev lcov
+    gnutls-dev libgnutls28-dev lcov wget
 
 # 克隆 pcguard-cov 仓库
 RUN git clone https://github.com/csu-wingmate/pcguard-cov.git
