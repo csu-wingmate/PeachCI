@@ -118,4 +118,4 @@ fuzzers/PeachStar
 All the required files (i.e., Dockerfile, run.sh) follow some templates so that one can easily follow them to prepare files for a new fuzzer.
 
 # Demo Video
-[Click to view the demo video](https://youtu.be/3_XQVxoUiMM)
+[Click to view the demo video](https://youtu.be/sFiSpNUhTnk.)
