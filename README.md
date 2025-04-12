@@ -66,9 +66,13 @@ exec_common.sh lightftp 4 results-lightftp peach 300
 
 A successful script execution will produce output similar to this:
 ```
-Peach: Fuzzing in progress ...
-Peach: Waiting for the following containers to stop:  f2da4b72b002 b7421386b288 cebbbc741f93 5c54104ddb86
-Peach: I am done!
+Waiting for all containers to stop: f2afb7663d5c 3e6692142351 c58f1648052b 6730a78e6055 
+PEACH: Collecting results and save them to results-lightftp
+PEACH: Collecting results from container f2afb7663d5cSuccessfully copied 3.07kB to /home/cwl/PeachCI/results-lightftp/peach_1_logs
+PEACH: Collecting results from container 3e6692142351Successfully copied 3.07kB to /home/cwl/PeachCI/results-lightftp/peach_2_logs
+PEACH: Collecting results from container c58f1648052bSuccessfully copied 3.58kB to /home/cwl/PeachCI/results-lightftp/peach_1_branch
+PEACH: Collecting results from container 6730a78e6055Successfully copied 3.58kB to /home/cwl/PeachCI/results-lightftp/peach_2_branch
+PEACH: I am done!
 ```
 
 ## Step-3. Collect and analyze the results
