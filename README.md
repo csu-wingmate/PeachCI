@@ -87,7 +87,7 @@ This is an example of the generated code coverage report, potential vulnerabilit
 ![Grafana-Dashboard](https://github.com/csu-wingmate/profuzzpeach/blob/main/figures/Grafana-Dashboard.png)
 
 # Utility Scripts
-PeachCI includes scripts for building and running all fuzzers on all targets with pre-configured parameters. To build all targets for all fuzzers, run the script build_all.sh. To execute the fuzzers, use the script exec_all.sh.
+PeachCI includes scripts for building and running all fuzzers on all targets with pre-configured parameters. To build all targets for all fuzzers, run the script [build_all.sh](https://github.com/csu-wingmate/PeachCI/blob/main/scripts/execution/build_all.sh). To execute the fuzzers, use the script [exec_all.sh](https://github.com/csu-wingmate/PeachCI/blob/main/scripts/execution/exec_all.sh).
 
 # FAQs
 ## 1. How do I extend PeachCI?
